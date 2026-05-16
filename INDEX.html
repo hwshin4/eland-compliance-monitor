@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이랜드이츠 채용공고 컴플라이언스 모니터 | 감사실</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap');
+:root{
+  --navy:#0f1f3d;--navy2:#1a3160;--accent:#e8401c;--gold:#c8973a;
+  --bg:#f5f4f0;--card:#fff;--border:#e2e0da;--border2:#d0cec8;
+  --text:#1a1a1a;--sub:#5a5a5a;--muted:#9a9a9a;
+  --high-bg:#fff0ee;--high:#b02a10;
+  --mid-bg:#fff8ec;--mid:#875900;
+  --ok-bg:#edf7f2;--ok:#1a6645;
+  --info-bg:#eef4ff;--info:#1a3e6e;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+
+/* ── HEADER ─────────────────────────────────────── */
+.hdr{background:var(--navy);position:sticky;top:0;z-index:200;box-shadow:0 2px 16px rgba(0,0,0,.3)}
+.hdr-in{max-width:1360px;margin:0 auto;padding:14px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.hdr-l{display:flex;align-items:center;gap:12px}
+.hdr-ico{width:36px;height:36px;background:var(--accent);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.hdr-t h1{font-size:14px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.hdr-t p{font-size:11px;color:rgba(255,255,255,.5);margin-top:1px}
+.hdr-r{display:flex;gap:8px;align-items:center}
+.chip{border-radius:20px;padding:4px 12px;font-size:11px;font-weight:600}
+.chip-dept{background:var(--gold);color:#fff}
+.chip-updated{background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2);font-weight:400;font-size:11px}
+
+/* ── VIEW TABS ──────────────────────────────────── */
+.view-tabs{background:var(--navy2);border-bottom:1px solid rgba(255,255,255,.08)}
+.view-tabs-in{max-width:1360px;margin:0 auto;padding:0 28px;display:flex;gap:0}
+.vtab{padding:11px 22px;font-size:12px;font-weight:600;color:rgba(255,255,255,.5);cursor:pointer;border-bottom:2px solid transparent;transition:all .15s;letter-spacing:.2px}
+.vtab:hover{color:rgba(255,255,255,.85)}
+.vtab.on{color:#fff;border-bottom-color:var(--accent)}
+
+/* ── WEEK SELECTOR ──────────────────────────────── */
+.week-bar{background:var(--card);border-bottom:1px solid var(--border);padding:0 28px}
+.week-bar-in{max-width:1360px;margin:0 auto;display:flex;gap:0;overflow-x:auto}
+.week-bar::-webkit-scrollbar{height:3px}
+.wtab{padding:12px 18px;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;transition:all .15s}
+.wtab:hover{color:var(--text)}
+.wtab.on{color:var(--navy);border-bottom-color:var(--navy);font-weight:700}
+.wtab.has-high{color:var(--high)}
+.wtab.has-high.on{border-bottom-color:var(--high)}
+
+/* ── MAIN ───────────────────────────────────────── */
+.main{max-width:1360px;margin:0 auto;padding:22px 28px 60px}
+
+/* ── PANEL ──────────────────────────────────────── */
+.panel{display:none}
+.panel.on{display:block}
+
+/* ── KPI ────────────────────────────────────────── */
+.kpi{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px}
+.kc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px 17px;position:relative;overflow:hidden}
+.kc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--border)}
+.kc.red::before{background:#e24b4a}.kc.amber::before{background:#c8973a}
+.kc.green::before{background:#3b9e75}.kc.blue::before{background:#2d7dd2}
+.kc-lbl{font-size:11px;color:var(--muted);margin-bottom:4px}
+.kc-val{font-size:24px;font-weight:700}
+.kc-val.red{color:#c13030}.kc-val.amber{color:#875900}
+.kc-val.green{color:#1a6645}.kc-val.blue{color:#1a5fa8}
+.kc-sub{font-size:10px;color:var(--muted);margin-top:2px}
+
+/* ── NOTE ───────────────────────────────────────── */
+.note{background:var(--info-bg);border:1px solid #c0d4f5;border-left:4px solid #2d7dd2;border-radius:8px;padding:10px 14px;font-size:12px;color:var(--info);margin-bottom:16px;line-height:1.7}
+.note strong{font-weight:600}
+
+/* ── SECTION ────────────────────────────────────── */
+.sec{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.04);margin-bottom:18px}
+.sec-hd{background:var(--navy);padding:12px 17px;display:flex;align-items:center;justify-content:space-between}
+.sec-hd h2{color:#fff;font-size:13px;font-weight:600}
+.sec-hd .cbadge{background:rgba(255,255,255,.15);color:#fff;font-size:11px;padding:2px 9px;border-radius:20px}
+.sec-hd .dlbl{color:rgba(255,255,255,.55);font-size:11px}
+.tbl-wrap{overflow-x:auto}
+
+/* ── BRAND TABLE ────────────────────────────────── */
+table.btbl{width:100%;border-collapse:collapse;font-size:12px}
+table.btbl thead th{background:#f8f7f4;color:var(--sub);font-weight:600;font-size:11px;padding:9px 13px;border-bottom:1px solid var(--border);white-space:nowrap;text-align:center}
+table.btbl thead th:first-child{text-align:left;min-width:110px}
+table.btbl tbody td{padding:10px 13px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle}
+table.btbl tbody tr:last-child td{border-bottom:none}
+table.btbl tbody tr:hover td{background:#fafaf8}
+table.btbl tfoot td{background:#f0eee8;font-weight:700;font-size:12px;padding:9px 13px;border-top:2px solid var(--border2);text-align:center}
+table.btbl tfoot td:first-child{text-align:left}
+
+/* ── DETAIL TABLE ───────────────────────────────── */
+table.dtbl{width:100%;border-collapse:collapse;font-size:12px}
+table.dtbl thead th{background:#f8f7f4;color:var(--sub);font-weight:600;font-size:11px;padding:9px 12px;border-bottom:1px solid var(--border);white-space:nowrap;text-align:left}
+table.dtbl tbody td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.55}
+table.dtbl tbody tr:last-child td{border-bottom:none}
+table.dtbl tbody tr:hover td{background:#fafaf8}
+
+/* ── PILLS & BADGES ─────────────────────────────── */
+.bpill{display:inline-block;font-size:11px;background:var(--navy);color:#fff;padding:2px 8px;border-radius:4px;white-space:nowrap}
+.bpill.none{background:#e0e0e0;color:#999;font-style:italic}
+.plt-tag{font-size:10px;background:#f0f0f0;color:var(--sub);padding:2px 6px;border-radius:3px;white-space:nowrap;display:inline-block}
+.lv-badge{font-size:11px;font-weight:600;padding:3px 9px;border-radius:20px;display:inline-block;white-space:nowrap}
+.lv-high{background:var(--high-bg);color:var(--high)}
+.lv-mid{background:var(--mid-bg);color:var(--mid)}
+.lv-ok{background:var(--ok-bg);color:var(--ok)}
+.num-h{color:#b02a10;font-weight:700;font-size:14px}
+.num-m{color:#875900;font-weight:700;font-size:14px}
+.num-o{color:#1a6645;font-weight:700;font-size:14px}
+.num-z{color:#ccc;font-size:12px}
+.num-t{font-weight:700;font-size:14px}
+.unconf{font-size:11px;background:#f5f5f5;color:#aaa;padding:2px 6px;border-radius:3px;font-style:italic}
+.bar-wrap{display:flex;height:4px;border-radius:2px;overflow:hidden;width:60px;margin:3px auto 0;background:#eee}
+.bar-h{background:#e24b4a}.bar-m{background:#c8973a}.bar-o{background:#3b9e75}
+
+/* ── STORE LINK ─────────────────────────────────── */
+.rdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:5px;flex-shrink:0;vertical-align:middle}
+.rdot-high{background:#e24b4a}.rdot-mid{background:#c8973a}.rdot-ok{background:#3b9e75}
+.sname-high{font-weight:700;color:#b02a10}
+.sname-mid{font-weight:700;color:#875900}
+.sname-ok{font-weight:600;color:var(--text)}
+a.slink{text-decoration:none;display:inline-flex;align-items:center;gap:3px;transition:opacity .15s}
+a.slink:hover{opacity:.7;text-decoration:underline}
+.slink .ico{font-size:10px;opacity:.5}
+.law-wrap{margin-top:3px;display:flex;gap:2px;flex-wrap:wrap}
+.law-tag{font-size:10px;background:#deeaff;color:#1a3e8c;padding:1px 5px;border-radius:3px}
+.rt{font-size:12px;line-height:1.6}
+.rt.high{color:#b02a10}.rt.mid{color:#875900}.rt.ok{color:#1a6645}
+.st-r{font-size:11px;font-weight:700;color:#b02a10}
+.st-w{font-size:11px;font-weight:700;color:#875900}
+.st-g{font-size:11px;font-weight:700;color:#1a6645}
+
+/* ── FILTER BAR ─────────────────────────────────── */
+.fbar{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:12px;align-items:center}
+.fl{font-size:12px;color:var(--muted)}
+.fbtn{font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:500;padding:5px 12px;border:1px solid var(--border);border-radius:20px;background:var(--card);color:var(--sub);cursor:pointer;transition:all .15s}
+.fbtn:hover{border-color:#aaa;color:var(--text)}
+.fbtn.on{background:var(--navy);color:#fff;border-color:var(--navy)}
+.fbtn.high.on{background:#b02a10;border-color:#b02a10}
+.fbtn.mid.on{background:#875900;border-color:#875900}
+.fbtn.ok.on{background:#1a6645;border-color:#1a6645}
+
+/* ── LEGEND ─────────────────────────────────────── */
+.legend{display:flex;gap:14px;flex-wrap:wrap;align-items:center;margin-bottom:10px;font-size:11px;color:var(--sub)}
+.li{display:flex;align-items:center;gap:4px}
+
+/* ── CUMULATIVE CHARTS ──────────────────────────── */
+.cum-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:18px}
+.cum-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px}
+.cum-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:16px}
+.chart-area{position:relative;height:160px;display:flex;align-items:flex-end;gap:8px;padding-bottom:24px}
+.bar-col{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1}
+.bar-col-label{font-size:10px;color:var(--muted);text-align:center;line-height:1.3;height:28px;display:flex;align-items:flex-end;justify-content:center;margin-bottom:4px}
+.bar-stacked{width:100%;display:flex;flex-direction:column-reverse;border-radius:4px 4px 0 0;overflow:hidden;min-height:4px;transition:all .3s}
+.bsh{background:#e24b4a}.bsm{background:#c8973a}.bso{background:#3b9e75}
+.bar-val{font-size:10px;font-weight:600;color:var(--text);margin-top:3px}
+.chart-legend{display:flex;gap:12px;margin-top:12px;flex-wrap:wrap}
+.cl-item{display:flex;align-items:center;gap:5px;font-size:11px;color:var(--sub)}
+.cl-dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+
+/* trend */
+.trend-area{display:flex;flex-direction:column;gap:8px}
+.trend-row{display:flex;align-items:center;gap:8px}
+.trend-lbl{font-size:11px;color:var(--sub);width:90px;flex-shrink:0;text-align:right}
+.trend-bar-wrap{flex:1;height:20px;background:#f0eee8;border-radius:4px;overflow:hidden;position:relative}
+.trend-bar{height:100%;border-radius:4px;display:flex;align-items:center;padding:0 6px;font-size:10px;font-weight:600;color:#fff;transition:width .5s}
+.trend-count{font-size:11px;font-weight:600;color:var(--text);width:30px;text-align:right}
+
+/* cumulative brand table */
+.cum-brand-tbl{width:100%;border-collapse:collapse;font-size:12px;margin-top:0}
+.cum-brand-tbl thead th{background:#f8f7f4;color:var(--sub);font-weight:600;font-size:11px;padding:8px 12px;border-bottom:1px solid var(--border);text-align:center;white-space:nowrap}
+.cum-brand-tbl thead th:first-child{text-align:left}
+.cum-brand-tbl tbody td{padding:9px 12px;border-bottom:1px solid var(--border);text-align:center;font-size:12px}
+.cum-brand-tbl tbody tr:last-child td{border-bottom:none}
+.cum-brand-tbl tbody tr:hover td{background:#fafaf8}
+.cum-brand-tbl tfoot td{background:#f0eee8;font-weight:700;padding:9px 12px;border-top:2px solid var(--border2);text-align:center;font-size:12px}
+.cum-brand-tbl tfoot td:first-child{text-align:left}
+
+/* risk timeline */
+.timeline{display:flex;flex-direction:column;gap:10px;padding:4px 0}
+.tl-item{display:flex;gap:12px;align-items:flex-start}
+.tl-week{font-size:11px;color:var(--muted);width:95px;flex-shrink:0;padding-top:2px;text-align:right}
+.tl-dot-wrap{display:flex;flex-direction:column;align-items:center;gap:0}
+.tl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.tl-line{width:2px;flex:1;background:var(--border);margin-top:2px;min-height:20px}
+.tl-content{flex:1;padding-bottom:10px}
+.tl-store{font-size:12px;font-weight:600}
+.tl-store.high{color:var(--high)}.tl-store.mid{color:var(--mid)}
+.tl-risk{font-size:11px;color:var(--sub);margin-top:2px;line-height:1.5}
+.tl-badge{display:inline-block;font-size:10px;font-weight:600;padding:1px 7px;border-radius:10px;margin-right:5px}
+
+/* ── MODAL ──────────────────────────────────────── */
+.mo-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center;padding:20px}
+.mo-ov.open{display:flex}
+.mo{background:var(--card);border-radius:16px;max-width:600px;width:100%;max-height:80vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.mo-hd{background:var(--navy);padding:17px 20px;border-radius:16px 16px 0 0;display:flex;align-items:center;justify-content:space-between}
+.mo-hd h2{color:#fff;font-size:14px;font-weight:700}
+.mo-cls{background:none;border:none;color:rgba(255,255,255,.7);font-size:22px;cursor:pointer;padding:0 4px}
+.mo-cls:hover{color:#fff}
+.mo-body{padding:20px}
+.mo-sec{margin-bottom:16px}
+.mo-sec h3{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.mo-sec p{font-size:13px;line-height:1.7;color:var(--text)}
+.alert-box{background:var(--high-bg);border:1px solid #f5c0b5;border-radius:8px;padding:10px 14px;font-size:13px;color:var(--high);line-height:1.7;font-weight:500}
+
+/* ── ACT CARDS ──────────────────────────────────── */
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.act-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:15px 16px;cursor:pointer;transition:all .15s;display:flex;align-items:flex-start;gap:10px}
+.act-card:hover{border-color:var(--navy);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.08)}
+.act-ico{width:32px;height:32px;flex-shrink:0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px}
+.act-ico.red{background:var(--high-bg)}.act-ico.navy{background:#e8edf5}
+.act-txt h3{font-size:12px;font-weight:600;color:var(--text);margin-bottom:2px}
+.act-txt p{font-size:11px;color:var(--muted);line-height:1.4}
+
+/* ── SOURCES ────────────────────────────────────── */
+.srcs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px;align-items:center}
+.srcs-lbl{font-size:11px;color:var(--muted)}
+.stag{font-size:11px;background:var(--card);border:1px solid var(--border);border-radius:4px;padding:2px 7px;color:var(--sub)}
+
+/* ── COMPARISON TABLE ───────────────────────────── */
+.cmp-sec{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;box-shadow:0 1px 8px rgba(0,0,0,.04);margin-bottom:18px}
+.cmp-hd{background:linear-gradient(90deg,#1a3160,#0f1f3d);padding:12px 17px;display:flex;align-items:center;justify-content:space-between}
+.cmp-hd h2{color:#fff;font-size:13px;font-weight:600}
+.cmp-hd .cmp-sub{color:rgba(255,255,255,.55);font-size:11px}
+table.cmp-tbl{width:100%;border-collapse:collapse;font-size:12px}
+table.cmp-tbl thead th{background:#f8f7f4;color:var(--sub);font-weight:600;font-size:11px;padding:9px 14px;border-bottom:1px solid var(--border);text-align:center;white-space:nowrap}
+table.cmp-tbl thead th:first-child{text-align:left;min-width:120px}
+table.cmp-tbl thead th.col-prev{background:#fdf6ee;color:#875900}
+table.cmp-tbl thead th.col-cur{background:#edf7f2;color:#1a6645}
+table.cmp-tbl tbody td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:center;vertical-align:middle;font-size:12px}
+table.cmp-tbl tbody td:first-child{text-align:left;font-weight:500}
+table.cmp-tbl tbody tr:last-child td{border-bottom:none}
+table.cmp-tbl tbody tr:hover td{background:#fafaf8}
+.cmp-arrow-up{color:#b02a10;font-weight:700}
+.cmp-arrow-dn{color:#1a6645;font-weight:700}
+.cmp-arrow-eq{color:#9a9a9a}
+.cmp-tag-high{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--high-bg);color:var(--high)}
+.cmp-tag-mid{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--mid-bg);color:var(--mid)}
+.cmp-tag-ok{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:var(--ok-bg);color:var(--ok)}
+.cmp-tag-new{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:10px;background:#e8edf5;color:var(--navy)}
+.cmp-resolved{color:#1a6645;font-weight:600}
+.cmp-new-risk{color:#b02a10;font-weight:600}
+.cmp-same{color:var(--muted)}
+.brand-changes{display:flex;flex-direction:column;gap:6px;padding:14px 17px;border-top:1px solid var(--border)}
+.bc-row{display:flex;align-items:flex-start;gap:8px;font-size:12px}
+.bc-brand{font-weight:600;color:var(--text);width:110px;flex-shrink:0}
+.bc-arrow{font-size:14px;flex-shrink:0;width:18px;text-align:center}
+.bc-desc{color:var(--sub);flex:1;line-height:1.55}
+
+/* ── FOOTER ─────────────────────────────────────── */
+footer{background:var(--navy);padding:16px 28px;color:rgba(255,255,255,.45);font-size:11px;line-height:1.8}
+.ft-in{max-width:1360px;margin:0 auto}
+footer strong{color:rgba(255,255,255,.75)}
+
+@media print{.hdr{position:static}.fbar,.act-grid,.mo-ov,.view-tabs,.week-bar,.legend{display:none!important}body{background:#fff}}
+@media(max-width:960px){.kpi{grid-template-columns:repeat(3,1fr)}.act-grid{grid-template-columns:1fr 1fr}.cum-grid{grid-template-columns:1fr}.main{padding:16px 14px 40px}.hdr-in{padding:12px 14px}}
+@media(max-width:600px){.kpi{grid-template-columns:1fr 1fr}.act-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <div class="hdr-in">
+    <div class="hdr-l">
+      <div class="hdr-ico">⚖️</div>
+      <div class="hdr-t">
+        <h1>이랜드이츠 채용공고 컴플라이언스 모니터</h1>
+        <p>채용절차법 · 근로기준법 · 최저임금법 리스크 자동 분석 | 감사실</p>
+      </div>
+    </div>
+    <div class="hdr-r">
+      <span class="chip chip-updated" id="updated-label">2026.05.06 업데이트</span>
+      <span class="chip chip-dept">감사실</span>
+    </div>
+  </div>
+</header>
+
+<!-- VIEW TABS -->
+<div class="view-tabs">
+  <div class="view-tabs-in">
+    <div class="vtab on" onclick="switchView('weekly',this)">📋 주간 리포트</div>
+    <div class="vtab"    onclick="switchView('cumulative',this)">📊 누적 현황</div>
+  </div>
+</div>
+
+<!-- WEEK SELECTOR (주간 뷰에서만 표시) -->
+<div class="week-bar" id="week-bar">
+  <div class="week-bar-in" id="week-tabs"></div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- ════════════════════════════════════════════
+       PANEL 1 : 주간 리포트
+  ════════════════════════════════════════════════ -->
+  <div class="panel on" id="panel-weekly">
+
+    <!-- KPI -->
+    <div class="kpi" id="w-kpi"></div>
+
+    <!-- NOTE -->
+    <div class="note" id="w-note"></div>
+
+    <!-- SOURCES -->
+    <div class="srcs">
+      <span class="srcs-lbl">검색 플랫폼:</span>
+      <span class="stag">알바몬</span><span class="stag">알바천국</span><span class="stag">잡코리아</span>
+      <span class="stag">사람인</span><span class="stag">당근알바</span><span class="stag">이랜드이츠 채용몰</span>
+    </div>
+
+    <!-- 전주 대비 변경사항 -->
+    <div id="w-cmp-wrap"></div>
+
+    <!-- 브랜드별 요약 -->
+    <div class="sec">
+      <div class="sec-hd">
+        <h2>📊 브랜드별 공고 현황 요약</h2>
+        <span class="dlbl" id="w-date-label"></span>
+      </div>
+      <div class="tbl-wrap"><table class="btbl"><thead><tr>
+        <th style="text-align:left">브랜드</th><th>전체</th>
+        <th>🔴 고위험</th><th>🟡 중위험</th><th>🟢 이상없음</th>
+        <th style="min-width:150px;text-align:left">주요 리스크</th><th>즉시조치</th>
+      </tr></thead>
+      <tbody id="w-brand-tbody"></tbody>
+      <tfoot><tr>
+        <td>합계</td><td id="wf-t">—</td><td id="wf-h" style="color:#b02a10">—</td>
+        <td id="wf-m" style="color:#875900">—</td><td id="wf-o" style="color:#1a6645">—</td>
+        <td></td><td id="wf-a">—</td>
+      </tr></tfoot></table></div>
+    </div>
+
+    <!-- 범례 + 필터 -->
+    <div class="legend">
+      <span style="font-weight:600;color:var(--text)">매장명 색상:</span>
+      <span class="li"><span class="rdot rdot-high"></span><span class="sname-high">고위험</span></span>
+      <span class="li"><span class="rdot rdot-mid"></span><span class="sname-mid">중위험</span></span>
+      <span class="li"><span class="rdot rdot-ok"></span><span class="sname-ok">이상없음</span></span>
+      <span style="color:var(--muted);margin-left:4px">· 매장명 클릭 → 공고 페이지 이동</span>
+    </div>
+    <div class="fbar">
+      <span class="fl">필터:</span>
+      <button class="fbtn on"  onclick="wflt('all',this)"  id="fb-all">전체</button>
+      <button class="fbtn high" onclick="wflt('high',this)" id="fb-high">🔴 고위험</button>
+      <button class="fbtn mid"  onclick="wflt('mid',this)"  id="fb-mid">🟡 중위험</button>
+      <button class="fbtn ok"   onclick="wflt('ok',this)"   id="fb-ok">🟢 이상없음</button>
+      <button class="fbtn" style="margin-left:auto" onclick="window.print()">🖨️ PDF 저장</button>
+    </div>
+
+    <!-- 상세 공고 -->
+    <div class="sec">
+      <div class="sec-hd">
+        <h2>📋 매장별 공고 상세 — 노동법 리스크 분석</h2>
+        <span class="cbadge" id="w-cnt">—</span>
+      </div>
+      <div class="tbl-wrap"><table class="dtbl">
+        <thead><tr>
+          <th style="width:26px">No.</th>
+          <th style="min-width:150px">매장명 (클릭→공고)</th>
+          <th style="min-width:80px">브랜드</th>
+          <th style="min-width:68px">플랫폼</th>
+          <th style="min-width:170px">공고 요약</th>
+          <th style="min-width:210px">리스크 내용</th>
+          <th style="min-width:70px">위험도</th>
+          <th style="min-width:55px">조치</th>
+        </tr></thead>
+        <tbody id="w-detail-tbody"></tbody>
+      </table></div>
+    </div>
+
+    <!-- 빠른 실행 -->
+    <div class="act-grid">
+      <div class="act-card" onclick="showMo('expired')">
+        <div class="act-ico red">📋</div>
+        <div class="act-txt"><h3>마감 공고 방치</h3><p>잡코리아 1분기 신입공고 마감 후 4개월 노출 중</p></div>
+      </div>
+      <div class="act-card" onclick="showMo('email')">
+        <div class="act-ico navy">✉️</div>
+        <div class="act-txt"><h3>이메일 보고서 발송</h3><p>매주 화요일 shinhw@eland.co.kr 발송 안내</p></div>
+      </div>
+      <div class="act-card" onclick="switchView('cumulative',document.querySelectorAll('.vtab')[1])">
+        <div class="act-ico navy">📊</div>
+        <div class="act-txt"><h3>누적 현황 보기</h3><p>전체 주차 리스크 트렌드 및 브랜드별 통계</p></div>
+      </div>
+    </div>
+
+  </div><!-- /panel-weekly -->
+
+
+  <!-- ════════════════════════════════════════════
+       PANEL 2 : 누적 현황
+  ════════════════════════════════════════════════ -->
+  <div class="panel" id="panel-cumulative">
+
+    <!-- 누적 KPI -->
+    <div class="kpi" id="c-kpi"></div>
+
+    <!-- 주차별 막대차트 + 트렌드 -->
+    <div class="cum-grid">
+      <!-- 주차별 리스크 추이 -->
+      <div class="cum-card">
+        <div class="cum-title">📈 주차별 공고 리스크 추이</div>
+        <div class="chart-area" id="c-chart"></div>
+        <div class="chart-legend">
+          <div class="cl-item"><div class="cl-dot" style="background:#e24b4a"></div>고위험</div>
+          <div class="cl-item"><div class="cl-dot" style="background:#c8973a"></div>중위험</div>
+          <div class="cl-item"><div class="cl-dot" style="background:#3b9e75"></div>이상없음</div>
+        </div>
+      </div>
+
+      <!-- 브랜드별 누적 -->
+      <div class="cum-card">
+        <div class="cum-title">🏷️ 브랜드별 누적 리스크 발생 건수</div>
+        <div class="trend-area" id="c-trend"></div>
+      </div>
+    </div>
+
+    <!-- 브랜드별 누적 집계표 -->
+    <div class="sec">
+      <div class="sec-hd">
+        <h2>📊 브랜드별 누적 집계</h2>
+        <span class="dlbl" id="c-range-label"></span>
+      </div>
+      <div class="tbl-wrap">
+        <table class="cum-brand-tbl">
+          <thead><tr>
+            <th style="text-align:left;min-width:110px">브랜드</th>
+            <th>총 공고</th><th>고위험 누적</th><th>중위험 누적</th>
+            <th>이상없음</th><th>위험률</th><th>최근 상태</th>
+          </tr></thead>
+          <tbody id="c-brand-tbody"></tbody>
+          <tfoot><tr id="c-brand-tfoot"></tr></tfoot>
+        </table>
+      </div>
+    </div>
+
+    <!-- 고위험 이슈 타임라인 -->
+    <div class="sec">
+      <div class="sec-hd">
+        <h2>🚨 고위험 이슈 타임라인</h2>
+        <span class="dlbl">전체 기간</span>
+      </div>
+      <div style="padding:18px 20px">
+        <div class="timeline" id="c-timeline"></div>
+      </div>
+    </div>
+
+  </div><!-- /panel-cumulative -->
+
+</div><!-- /main -->
+
+<footer>
+  <div class="ft-in">
+    <strong>이랜드이츠 감사실 | 채용공고 노동법 컴플라이언스 모니터링</strong><br>
+    적용 법령: 채용절차의 공정화에 관한 법률 · 근로기준법 · 최저임금법 · 남녀고용평등법 · 고용정책기본법<br>
+    2026년 최저임금: 10,320원/시간 | 검색 브랜드: 애슐리 · 델리By애슐리 · 자연별곡 · 로운 · 피자몰 · 리미니 · 반궁 · 프랑제리 · 더카페 · 페르케노
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="mo-ov" id="mo-ov" onclick="closeMo(event)">
+  <div class="mo">
+    <div class="mo-hd"><h2 id="mo-title"></h2><button class="mo-cls" onclick="document.getElementById('mo-ov').classList.remove('open')">✕</button></div>
+    <div class="mo-body" id="mo-body"></div>
+  </div>
+</div>
+
+<script>
+// ════════════════════════════════════════════════════════════════
+//  DATA — 주차별로 배열에 추가하면 됩니다
+// ════════════════════════════════════════════════════════════════
+const WEEKS = [
+
+  // ─────────────────────────────────────────────────────────────
+  // 주차 1 : 2026.04.20 ~ 04.26
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "w1",
+    label: "4/20~26",
+    range: "2026.04.20 ~ 04.26",
+    note: "알바몬 · 잡코리아 · 당근알바 · 이랜드이츠 채용몰 (2026.04.28 검색) | 미확인 브랜드: 자연별곡·반궁·프랑제리·더카페·페르케노",
+    brands: [
+      { name:"애슐리퀸즈",    total:11, high:0, mid:1, ok:10, act:0, conf:true,  risk:"루원시티점 이메일 지원 — 채용서류 반환 안내 확인 필요" },
+      { name:"델리By애슐리",  total:3,  high:0, mid:1, ok:2,  act:0, conf:true,  risk:"평촌킴스점 주휴포함 시급 단독 표기 — 기본시급 명시 필요" },
+      { name:"자연별곡",      total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"로운",          total:2,  high:0, mid:0, ok:2,  act:0, conf:true,  risk:"이상없음" },
+      { name:"피자몰",        total:4,  high:0, mid:3, ok:1,  act:0, conf:true,  risk:"초단시간 주휴수당 미고지(2건), 이메일 지원 서류반환 미안내(1건)" },
+      { name:"리미니",        total:2,  high:1, mid:0, ok:1,  act:1, conf:true,  risk:"【즉시시정】위례점 시급 10,030원 최저임금(10,320원) 미달 — 당근알바 공고" },
+      { name:"반궁",          total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"프랑제리",      total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"더카페",        total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"페르케노",      total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"공통(5개브랜드)",total:1, high:1, mid:0, ok:0,  act:1, conf:true,  risk:"【즉시시정】잡코리아 마감 공고(2026.01.28) 약 3개월 방치" },
+    ],
+    detail: [
+      { store:"애슐리퀸즈 루원시티 인천점",    url:"https://www.albamon.com/jobs/detail/116217506", brand:"애슐리퀸즈",     plt:"알바몬",             sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 이메일 지원 포함", risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 여부 확인 필요(채용절차법 제11조)", law:["채용절차법"], lv:"mid", st:"검토중" },
+      { store:"애슐리퀸즈 스타필드빌리지 운정점",url:"https://www.albamon.com/jobs/detail/116245546",brand:"애슐리퀸즈",    plt:"알바몬",             sum:"홀/주방 신규오픈, 시급 10,320원, 간편문자 지원",               risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"애슐리퀸즈 NC 해운대점",         url:"https://www.albamon.com/jobs/detail/116244956",brand:"애슐리퀸즈",     plt:"알바몬",             sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원) 별도 명시",     risk:"이상없음 — 기본·주휴포함 구분 명시 적정", law:[], lv:"ok", st:"완료" },
+      { store:"애슐리퀸즈 스타필드시티 부천점",  url:"https://www.albamon.com/jobs/detail/116244210",brand:"애슐리퀸즈",    plt:"알바몬",             sum:"홀/주방, 시급 10,320원, 온라인+문자 지원",                    risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"애슐리퀸즈 던던 동대문점",        url:"https://www.albamon.com/jobs/detail/116240502",brand:"애슐리퀸즈",    plt:"알바몬",             sum:"홀, 기본시급 10,320원(주휴포함 12,384원) 명시",               risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"애슐리퀸즈 화정점(벨라시타 일산)",url:"https://www.albamon.com/jobs/detail/116240356",brand:"애슐리퀸즈",    plt:"알바몬",             sum:"홀, 기본시급 10,320원(주휴포함 12,384원), 마감 2026-05-10",   risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"애슐리퀸즈 스타필드 운정점(주방)",url:"https://www.albamon.com/jobs/detail/116237525",brand:"애슐리퀸즈",    plt:"알바몬",             sum:"주방, 기본시급 10,500원(주휴포함 12,600원)",                   risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"애슐리퀸즈 마곡점",              url:"https://www.albamon.com/jobs/detail/116241807", brand:"애슐리퀸즈",     plt:"알바몬",             sum:"주방, 주휴포함 12,720원, 마감 2026-04-30",                    risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"애슐리퀸즈 롯데몰 은평점",       url:"https://www.albamon.com/jobs/detail/116242168", brand:"애슐리퀸즈",     plt:"알바몬",             sum:"홀, 주휴포함 시급 12,384원, 상시모집",                        risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"이랜드이츠 채용몰 — 애슐리퀸즈 매장관리자",url:"https://elandeats.career.greetinghr.com/ko/o/201343",brand:"애슐리퀸즈",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시채용",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"델리BY애슐리 평촌킴스점",        url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",            sum:"주방 조리(핫파트), 주휴포함 시급 단독 표기",                   risk:"기본시급 미표기, 주휴포함 시급만 기재 — 기본시급 명시 필요(최저임금법 제6조)", law:["최저임금법"], lv:"mid", st:"검토중" },
+      { store:"델리BY애슐리 야탑킴스점",        url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",            sum:"주방, 주휴포함 12,360원 표기",                                 risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"델리BY애슐리 구로킴스점",        url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",            sum:"주방, 주휴포함 12,360원, 상시모집",                            risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"로운 샤브샤브 NC광주역점",       url:"https://www.daangn.com",                          brand:"로운",          plt:"당근알바",           sum:"홀 서빙, 주 4일 협의, 1개월 이상",                            risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"로운 샤브샤브 동탄이마트점",     url:"https://elandeats.career.greetinghr.com/ko/o/200949",brand:"로운",       plt:"이랜드이츠 채용몰", sum:"스토어매니저, 정규직, 상시채용",                               risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"피자몰 NC강서점",                url:"https://www.albamon.com/jobs/detail/116238046",   brand:"피자몰",        plt:"알바몬",             sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10", risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"피자몰 뉴코아평촌점",            url:"https://www.albamon.com/jobs/detail/116210355",   brand:"피자몰",        plt:"알바몬",             sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월",                  risk:"초단시간 공고이나 주휴수당 적용 기준 미명시(근로기준법 제18조)", law:["근로기준법"], lv:"mid", st:"검토중" },
+      { store:"피자몰 대구이월드점",            url:"https://www.albamon.com/jobs/detail/116205398",   brand:"피자몰",        plt:"알바몬",             sum:"초단시간, 시급 10,320원, 1~3개월",                            risk:"초단시간+단기계약 — 근로계약서 체결 의무 및 주휴수당 기준 안내 미확인(근로기준법 제17조·제18조)", law:["근로기준법"], lv:"mid", st:"검토중" },
+      { store:"피자몰 NC신구로점",              url:"https://www.albamon.com/jobs/detail/116166782",   brand:"피자몰",        plt:"알바몬",             sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",         risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 필요(채용절차법 제11조)", law:["채용절차법"], lv:"mid", st:"검토중" },
+      { store:"리미니 스타필드 위례점",         url:"https://www.albamon.com/total-search?keyword=%EB%A6%AC%EB%AF%B8%EB%8B%88",brand:"리미니",plt:"당근알바",sum:"기본시급 9,620원(주휴포함 10,030원) 표기", risk:"【즉시시정】기본시급 9,620원 · 주휴포함 10,030원 — 모두 최저임금(10,320원) 미달. 최저임금법 제6조 위반. 당근알바 공고 즉시 삭제 필요.", law:["최저임금법"], lv:"high", st:"미조치" },
+      { store:"이랜드이츠 채용몰 — 리미니 매장관리자",url:"https://elandeats.career.greetinghr.com/ko/o/202247",brand:"리미니",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"이랜드이츠 1분기 신입 채용\n(애슐리퀸즈·피자몰·로운·자연별곡·리미니)",url:"https://www.jobkorea.co.kr/Recruit/Co_Read/C/elandeats",brand:"공통(5개브랜드)",plt:"잡코리아",sum:"신입 매장관리자, 연봉 내규, 마감 2026-01-28",risk:"【즉시시정】마감일 2026.01.28 경과 후 약 3개월째 잡코리아 노출. 채용절차법 제4조 위반 소지. ※링크 클릭 시 이랜드이츠 잡코리아 기업페이지(마감공고 포함) 이동.",law:["채용절차법"],lv:"high",st:"미조치"},
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // 주차 2 : 2026.04.27 ~ 05.03
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "w2",
+    label: "4/27~5/3",
+    range: "2026.04.27 ~ 05.03",
+    note: "알바몬 · 잡코리아 · 당근알바 · 이랜드이츠 채용몰 (2026.05.06 검색) | 미확인: 자연별곡·반궁·프랑제리·더카페·페르케노 | 리미니 위례점 최저임금 위반 공고 미노출 확인(해소)",
+    brands: [
+      { name:"애슐리퀸즈",    total:10, high:0, mid:1, ok:9,  act:0, conf:true,  risk:"루원시티점 이메일 지원 — 채용서류 반환 안내 확인 필요" },
+      { name:"델리By애슐리",  total:3,  high:0, mid:1, ok:2,  act:0, conf:true,  risk:"평촌킴스점 주휴포함 시급 단독 표기 — 기본시급 명시 필요" },
+      { name:"자연별곡",      total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"로운",          total:1,  high:0, mid:0, ok:1,  act:0, conf:true,  risk:"이상없음" },
+      { name:"피자몰",        total:6,  high:0, mid:5, ok:1,  act:0, conf:true,  risk:"초단시간 주휴수당 미고지(3건), 이메일 지원 서류반환 미안내(1건), 중복공고(1건)" },
+      { name:"리미니",        total:2,  high:0, mid:0, ok:2,  act:0, conf:true,  risk:"이상없음 — 분당점 기본·주휴포함 시급 구분 명시 적정" },
+      { name:"반궁",          total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"프랑제리",      total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"더카페",        total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"페르케노",      total:0,  high:0, mid:0, ok:0,  act:0, conf:false, risk:"" },
+      { name:"공통(5개브랜드)",total:1, high:1, mid:0, ok:0,  act:1, conf:true,  risk:"【즉시시정】잡코리아 마감 공고(2026.01.28) 약 4개월 방치 — 전주 조치 미이행" },
+    ],
+    detail: [
+      { store:"애슐리퀸즈 롯데몰 은평점",          url:"https://www.albamon.com/jobs/detail/116242168",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀, 주휴포함 12,384원, 상시모집",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"애슐리퀸즈 마곡점",                  url:"https://www.albamon.com/jobs/detail/116241807",brand:"애슐리퀸즈",plt:"알바몬",sum:"주방, 주휴포함 12,720원, 마감 04-30",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"애슐리퀸즈 루원시티 인천점",          url:"https://www.albamon.com/jobs/detail/116217506",brand:"애슐리퀸즈",plt:"알바몬",sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 이메일 지원 포함, 4/27 등록",risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 여부 확인 필요(채용절차법 제11조)",law:["채용절차법"],lv:"mid",st:"검토중"},
+      { store:"애슐리퀸즈 스타필드빌리지 운정점",    url:"https://www.albamon.com/jobs/detail/116245546",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀/주방 신규오픈, 시급 10,320원",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"애슐리퀸즈 NC 해운대점",              url:"https://www.albamon.com/jobs/detail/116244956",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원) 별도 명시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"애슐리퀸즈 스타필드시티 부천점",      url:"https://www.albamon.com/jobs/detail/116244210",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀/주방, 시급 10,320원",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"애슐리퀸즈 던던 동대문점",            url:"https://www.albamon.com/jobs/detail/116240502",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀, 기본시급 10,320원(주휴포함 12,384원)",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"애슐리퀸즈 화정점(벨라시타 일산)",    url:"https://www.albamon.com/jobs/detail/116240356",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀, 기본시급 10,320원, 마감 2026-05-10",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"애슐리퀸즈 스타필드 운정점(주방)",    url:"https://www.albamon.com/jobs/detail/116237525",brand:"애슐리퀸즈",plt:"알바몬",sum:"주방, 기본시급 10,500원(주휴포함 12,600원)",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"이랜드이츠 채용몰 — 애슐리퀸즈 관리자",url:"https://elandeats.career.greetinghr.com/ko/o/201343",brand:"애슐리퀸즈",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"델리BY애슐리 평촌킴스점",             url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 시급 단독 표기",risk:"기본시급 미표기 — 기본시급 명시 필요(최저임금법 제6조 위반 예방)",law:["최저임금법"],lv:"mid",st:"검토중"},
+      { store:"델리BY애슐리 야탑킴스점",             url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 12,360원",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"델리BY애슐리 구로킴스점",             url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 12,360원, 상시모집",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"로운 샤브샤브 동탄이마트점(관리자)",  url:"https://elandeats.career.greetinghr.com/ko/o/200949",brand:"로운",plt:"이랜드이츠 채용몰",sum:"스토어매니저, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"피자몰 NC강서점 (4/27 신규)",         url:"https://www.albamon.com/jobs/detail/116238046",brand:"피자몰",plt:"알바몬",sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"피자몰 NC강서점 (4/26 기존·지속노출)",url:"https://www.albamon.com/jobs/detail/116217886",brand:"피자몰",plt:"알바몬",sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10",risk:"동일 매장 공고 2건 동시 노출 — 중복 게시 여부 확인 권고",law:[],lv:"ok",st:"완료"},
+      { store:"피자몰 뉴코아평촌점",                 url:"https://www.albamon.com/jobs/detail/116210355",brand:"피자몰",plt:"알바몬",sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월",risk:"초단시간 공고이나 소정근로시간·주휴수당 적용 기준 미명시(근로기준법 제18조)",law:["근로기준법"],lv:"mid",st:"검토중"},
+      { store:"피자몰 대구이월드점 (4/26)",          url:"https://www.albamon.com/jobs/detail/116205398",brand:"피자몰",plt:"알바몬",sum:"초단시간, 시급 10,320원, 1~3개월",risk:"초단시간+단기계약 — 근로계약서 체결 및 주휴수당 안내 미확인(근로기준법 제17조·제18조)",law:["근로기준법"],lv:"mid",st:"검토중"},
+      { store:"피자몰 대구이월드점 (4/23 기존·지속)", url:"https://www.albamon.com/jobs/detail/116167761",brand:"피자몰",plt:"알바몬",sum:"초단시간, 시급 10,320원, 4/23 등록 후 지속 노출",risk:"전주 동일 공고 지속 — 초단시간 주휴수당 미고지(근로기준법 제18조), 중복 공고 정리 권고",law:["근로기준법"],lv:"mid",st:"검토중"},
+      { store:"피자몰 NC신구로점",                   url:"https://www.albamon.com/jobs/detail/116166782",brand:"피자몰",plt:"알바몬",sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 필요(채용절차법 제11조)",law:["채용절차법"],lv:"mid",st:"검토중"},
+      { store:"리미니 2001 분당점",                  url:"https://www.daangn.com/kr/jobs/%EB%A6%AC%EB%AF%B8%EB%8B%88%EB%B6%84%EB%8B%B9%EC%A0%90%EC%95%84%EB%A5%B4%EB%B0%94%EC%9D%B4%ED%8A%B8%EB%AA%A8%EC%A7%91-%EC%A3%BC%ED%9C%B4%ED%8F%AC%ED%95%A8%EC%8B%9C%EA%B8%8912-384%EC%9B%90-kwwy5dzkyemv/",brand:"리미니",plt:"당근알바",sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원), 1분단위 수당 명시",risk:"이상없음 — 기본·주휴포함 구분 명시. 지난주 위례점 위반 공고 해소 확인",law:[],lv:"ok",st:"완료"},
+      { store:"이랜드이츠 채용몰 — 리미니 매장관리자",url:"https://elandeats.career.greetinghr.com/ko/o/202247",brand:"리미니",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"이랜드이츠 1분기 신입 채용\n(애슐리퀸즈·피자몰·로운·자연별곡·리미니)",url:"https://www.jobkorea.co.kr/Recruit/Co_Read/C/elandeats",brand:"공통(5개브랜드)",plt:"잡코리아",sum:"신입 매장관리자, 마감 2026-01-28",risk:"【즉시시정】마감 후 약 4개월째 잡코리아 노출 지속. 전주 조치 미이행 재확인. 채용절차법 제4조 위반 소지. ※링크 클릭 시 이랜드이츠 잡코리아 기업페이지(마감공고 포함) 이동.",law:["채용절차법"],lv:"high",st:"미조치"},
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // 주차 3 : 2026.05.04 ~ 05.10
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "w3",
+    label: "5/4~5/10",
+    range: "2026.05.04 ~ 05.10",
+    note: "알바몬 · 잡코리아 · 당근알바 · 이랜드이츠 채용몰 (2026.05.13 검색) | 미확인: 자연별곡·반궁·프랑제리·더카페·페르케노 | 🚨 잡코리아 1분기 마감공고 3주 연속 미조치 | ✅ 이랜드이츠 채용몰 2분기 신입 채용 신규 게시(5/10 마감 확인)",
+    brands: [
+      { name:"애슐리퀸즈",     conf:true,  risk:"일부 공고 주휴포함 시급 단독 표기 — 기본시급 명시 여부 확인 필요" },
+      { name:"델리By애슐리",   conf:true,  risk:"평촌킴스점 주휴포함 시급 단독 표기 지속 — 기본시급 명시 필요" },
+      { name:"자연별곡",       conf:false, risk:"" },
+      { name:"로운",           conf:true,  risk:"이상없음" },
+      { name:"피자몰",         conf:true,  risk:"초단시간 주휴수당 미고지(2건) 지속 미조치, 이메일 지원 서류반환 미안내(1건), 중복공고(2건)" },
+      { name:"리미니",         conf:true,  risk:"이상없음" },
+      { name:"반궁",           conf:false, risk:"" },
+      { name:"프랑제리",       conf:false, risk:"" },
+      { name:"더카페",         conf:false, risk:"" },
+      { name:"페르케노",       conf:false, risk:"" },
+      { name:"공통(5개브랜드)",conf:true,  risk:"【즉시시정】잡코리아 1분기 마감공고 3주 연속 노출. 2분기 신규채용은 이랜드이츠 채용몰에 정상 게시" },
+    ],
+    detail: [
+      // ── 애슐리퀸즈 ──────────────────────────────────────────────
+      { store:"애슐리퀸즈 홈플러스 인천청라점 (홀)",
+        url:"https://m.albamon.com/jobs/detail/116339911",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"홀, 주휴포함 12,480원, 시급 10,400원 기재, 3~6개월",
+        risk:"기본시급(10,400원)과 주휴포함 시급(12,480원) 함께 기재 — 최저임금 충족, 표기 방식 적정",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 홈플러스 인천청라점 (주방)",
+        url:"https://m.albamon.com/jobs/detail/116600124",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 시급 10,400원, 3~6개월, 5/9 신규 등록",
+        risk:"공고 내 주휴포함 시급 미표기 — 기본시급 10,400원만 기재, 주휴포함 여부 명시 필요(최저임금법 제6조 위반 예방)",
+        law:["최저임금법"], lv:"mid", st:"검토중" },
+
+      { store:"애슐리퀸즈 롯데몰 군산점",
+        url:"https://m.albamon.com/jobs/detail/116489649",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"홀/주방, 시급 10,320원, 3~6개월, 주부사원 가능",
+        risk:"이상없음 — 최저임금 충족",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 원더아리아 청주점",
+        url:"https://m.albamon.com/jobs/detail/116367864",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주말 홀, 주휴포함 12,384원, 1~3개월",
+        risk:"이상없음 — 주휴포함 시급 명시",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"이랜드이츠 본부 — 애슐리퀸즈 이마트 월배점",
+        url:"https://m.albamon.com/jobs/detail/116404664",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 3~6개월",
+        risk:"이상없음 — 기본·주휴포함 시급 구분 명시",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 롯데아울렛 기흥점",
+        url:"https://m.albamon.com/jobs/detail/116612040",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 시급 12,000원, 3~6개월, 5/10 신규",
+        risk:"시급 12,000원 표기 — 주휴포함 여부 미명시. 기본시급인지 주휴포함인지 불명확(최저임금법 제6조 위반 예방)",
+        law:["최저임금법"], lv:"mid", st:"검토중" },
+
+      { store:"애슐리퀸즈 스타필드빌리지 운정점 (주방)",
+        url:"https://m.albamon.com/jobs/detail/116447197",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 바로채용",
+        risk:"이상없음 — 기본·주휴포함 구분 명시",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 킨텍스점 (주방마감)",
+        url:"https://m.albamon.com/jobs/detail/116395031",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방 마감, 시급 10,320원, 주휴포함 12,400원대 기재",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 AK수원점",
+        url:"https://m.albamon.com/jobs/detail/116594049",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 3~6개월",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 전주STS점 (주방/세척)",
+        url:"https://m.albamon.com/jobs/detail/116593995",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"식기세척·주방, 시급 10,320원, 3~6개월",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"이랜드이츠 채용몰 — 애슐리퀸즈 매장관리자",
+        url:"https://elandeats.career.greetinghr.com/ko/o/201343",
+        brand:"애슐리퀸즈", plt:"이랜드이츠 채용몰",
+        sum:"신입/경력, 정규직, 경력 1년 이상, 상시",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 델리By애슐리 ──────────────────────────────────────────
+      { store:"델리BY애슐리 평촌킴스점",
+        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        brand:"델리By애슐리", plt:"알바몬",
+        sum:"주방 조리(핫파트), 주휴포함 시급 단독 표기, 3주 연속 동일",
+        risk:"3주 연속 기본시급 미표기 — 기본시급 명시 여부 확인 필요(최저임금법 제6조). 반복 미조치 사항으로 담당 매장 직접 확인 권고",
+        law:["최저임금법"], lv:"mid", st:"미조치" },
+
+      { store:"델리BY애슐리 야탑킴스점",
+        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        brand:"델리By애슐리", plt:"알바몬",
+        sum:"주방, 주휴포함 12,360원",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"델리BY애슐리 구로킴스점",
+        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        brand:"델리By애슐리", plt:"알바몬",
+        sum:"주방, 주휴포함 12,360원, 상시모집",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 로운 ──────────────────────────────────────────────────
+      { store:"로운 샤브샤브 매장관리자",
+        url:"https://elandeats.career.greetinghr.com/ko/o/200949",
+        brand:"로운", plt:"이랜드이츠 채용몰",
+        sum:"스토어매니저, 신입/경력, 정규직, 상시채용",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 피자몰 ────────────────────────────────────────────────
+      { store:"피자몰 NC강서점 (4/27 등록·지속)",
+        url:"https://www.albamon.com/jobs/detail/116238046",
+        brand:"피자몰", plt:"알바몬",
+        sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 2026-05-10",
+        risk:"이상없음 — 마감일 도래(5/10). 마감 후 자동 삭제 여부 확인 필요",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"피자몰 NC강서점 (4/26 기존·중복)",
+        url:"https://www.albamon.com/jobs/detail/116217886",
+        brand:"피자몰", plt:"알바몬",
+        sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 2026-05-10",
+        risk:"동일 매장 공고 2건 동시 노출 3주 지속 — 중복 공고 즉시 정리 필요",
+        law:[], lv:"ok", st:"검토중" },
+
+      { store:"피자몰 뉴코아평촌점",
+        url:"https://www.albamon.com/jobs/detail/116210355",
+        brand:"피자몰", plt:"알바몬",
+        sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월, 상시모집",
+        risk:"초단시간 공고 주휴수당 적용 기준 미명시 3주 연속 미조치(근로기준법 제18조) — 담당 매장 직접 시정 권고",
+        law:["근로기준법"], lv:"mid", st:"미조치" },
+
+      { store:"피자몰 대구이월드점 (4/26·지속)",
+        url:"https://www.albamon.com/jobs/detail/116205398",
+        brand:"피자몰", plt:"알바몬",
+        sum:"초단시간, 시급 10,320원, 1~3개월",
+        risk:"초단시간+단기계약 주휴수당 미고지 2주 연속(근로기준법 제17조·제18조)",
+        law:["근로기준법"], lv:"mid", st:"검토중" },
+
+      { store:"피자몰 대구이월드점 (4/23·지속)",
+        url:"https://www.albamon.com/jobs/detail/116167761",
+        brand:"피자몰", plt:"알바몬",
+        sum:"초단시간, 시급 10,320원, 4/23 등록 후 3주 지속 노출",
+        risk:"동일 매장 공고 중복 3주 지속 — 공고 통합 또는 삭제 권고(근로기준법 제18조 주휴수당 미고지)",
+        law:["근로기준법"], lv:"mid", st:"미조치" },
+
+      { store:"피자몰 NC신구로점",
+        url:"https://www.albamon.com/jobs/detail/116166782",
+        brand:"피자몰", plt:"알바몬",
+        sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",
+        risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 3주 연속 미확인(채용절차법 제11조)",
+        law:["채용절차법"], lv:"mid", st:"미조치" },
+
+      // ── 리미니 ────────────────────────────────────────────────
+      { store:"리미니 2001 분당점",
+        url:"https://www.daangn.com/kr/jobs/%EB%A6%AC%EB%AF%B8%EB%8B%88%EB%B6%84%EB%8B%B9%EC%A0%90%EC%95%84%EB%A5%B4%EB%B0%94%EC%9D%B4%ED%8A%B8%EB%AA%A8%EC%A7%91-%EC%A3%BC%ED%9C%B4%ED%8F%AC%ED%95%A8%EC%8B%9C%EA%B8%8912-384%EC%9B%90-kwwy5dzkyemv/",
+        brand:"리미니", plt:"당근알바",
+        sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원), 1분단위 수당 명시",
+        risk:"이상없음 — 기본·주휴포함 구분 명시 적정",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"이랜드이츠 채용몰 — 리미니 매장관리자",
+        url:"https://elandeats.career.greetinghr.com/ko/o/202247",
+        brand:"리미니", plt:"이랜드이츠 채용몰",
+        sum:"신입/경력, 정규직, 상시",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 공통 ──────────────────────────────────────────────────
+      { store:"이랜드이츠 채용몰 — 2분기 대규모 신입 채용\n(전국/신입 STORE MANAGER)",
+        url:"https://elandeats.career.greetinghr.com/ko/home",
+        brand:"공통(5개브랜드)", plt:"이랜드이츠 채용몰",
+        sum:"2분기 매장관리자 신입 대규모 채용, 마감 2026-05-10 14:59",
+        risk:"신규 공고 확인 — 마감일(2026.05.10) 경과 후 플랫폼 삭제 여부 차주 확인 필요. 현재는 정상 게시 상태",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"이랜드이츠 1분기 신입 채용\n(애슐리퀸즈·피자몰·로운·자연별곡·리미니)",
+        url:"https://www.jobkorea.co.kr/Recruit/Co_Read/C/elandeats",
+        brand:"공통(5개브랜드)", plt:"잡코리아",
+        sum:"신입 매장관리자, 마감 2026-01-28",
+        risk:"【즉시시정】마감일 2026.01.28 경과 후 약 4.5개월 잡코리아 노출 지속. 3주 연속 미조치. 채용절차법 제4조 위반 소지. ※링크 클릭 시 이랜드이츠 잡코리아 기업페이지로 이동",
+        law:["채용절차법"], lv:"high", st:"미조치" },
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────
+  // 다음 주차는 아래에 동일한 형식으로 추가하세요 👇
+  // { id:"w4", label:"5/11~17", range:"2026.05.11 ~ 05.17", note:"...", brands:[...], detail:[...] },
+  // ─────────────────────────────────────────────────────────────
+
+];
+
+// ════════════════════════════════════════════════════════════════
+//  CONSTANTS
+// ════════════════════════════════════════════════════════════════
+const LVM  = { high:"고위험", mid:"중위험", ok:"이상없음" };
+const BLC  = { high:"lv-high", mid:"lv-mid", ok:"lv-ok" };
+const STMP = { 미조치:'<span class="st-r">⛔ 미조치</span>', 검토중:'<span class="st-w">🔄 검토중</span>', 완료:'<span class="st-g">✅ 완료</span>' };
+let curWeekIdx = WEEKS.length - 1;  // 기본: 가장 최신 주차
+let curWFilter = 'all';
+
+// ════════════════════════════════════════════════════════════════
+//  VIEW SWITCH
+// ════════════════════════════════════════════════════════════════
+function switchView(v, btn) {
+  document.querySelectorAll('.vtab').forEach(t => t.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.panel').forEach(p => p.classList.remove('on'));
+  document.getElementById('panel-' + v).classList.add('on');
+  document.getElementById('week-bar').style.display = v === 'weekly' ? '' : 'none';
+  if (v === 'cumulative') renderCumulative();
+}
+
+// ════════════════════════════════════════════════════════════════
+//  WEEK TABS
+// ════════════════════════════════════════════════════════════════
+function buildWeekTabs() {
+  const wrap = document.getElementById('week-tabs');
+  wrap.innerHTML = WEEKS.map((w, i) => {
+    const hasHigh = w.brands.some(b => b.high > 0);
+    return `<div class="wtab${i === curWeekIdx ? ' on' : ''}${hasHigh ? ' has-high' : ''}" onclick="selectWeek(${i},this)">
+      ${w.label}${hasHigh ? ' 🔴' : ''}
+    </div>`;
+  }).join('');
+}
+
+function selectWeek(idx, el) {
+  curWeekIdx = idx;
+  curWFilter = 'all';
+  document.querySelectorAll('.wtab').forEach(t => t.classList.remove('on'));
+  el.classList.add('on');
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  document.getElementById('fb-all').classList.add('on');
+  renderWeekly();
+}
+
+// ════════════════════════════════════════════════════════════════
+//  COMPARISON RENDER (전주 대비)
+// ════════════════════════════════════════════════════════════════
+function renderComparison() {
+  const wrap = document.getElementById('w-cmp-wrap');
+  if (curWeekIdx === 0) { wrap.innerHTML = ''; return; } // 첫 주차는 비교 없음
+
+  const cur  = WEEKS[curWeekIdx];
+  const prev = WEEKS[curWeekIdx - 1];
+
+  // 수치 비교 — 모두 detail[]에서 직접 계산
+  const cH = cur.detail.filter(d=>d.lv==='high').length;
+  const cM = cur.detail.filter(d=>d.lv==='mid').length;
+  const cO = cur.detail.filter(d=>d.lv==='ok').length;
+  const cT = cur.detail.length;
+  const pH = prev.detail.filter(d=>d.lv==='high').length;
+  const pM = prev.detail.filter(d=>d.lv==='mid').length;
+  const pO = prev.detail.filter(d=>d.lv==='ok').length;
+  const pT = prev.detail.length;
+
+  function diff(c, p, higherIsBad=true) {
+    if (c === p) return `<span class="cmp-arrow-eq">— 동일</span>`;
+    const d = c - p;
+    const sign = d > 0 ? '+' : '';
+    if (higherIsBad) {
+      return d > 0
+        ? `<span class="cmp-arrow-up">▲ ${sign}${d}</span>`
+        : `<span class="cmp-arrow-dn">▼ ${d}</span>`;
+    } else {
+      return d > 0
+        ? `<span class="cmp-arrow-dn">▲ ${sign}${d}</span>`
+        : `<span class="cmp-arrow-up">▼ ${d}</span>`;
+    }
+  }
+
+  // 브랜드별 변화 감지
+  const brandChanges = [];
+  cur.brands.forEach(cb => {
+    const pb = prev.brands.find(b => b.name === cb.name);
+    if (!pb) return;
+    if (!cb.conf && !pb.conf) return;
+
+    const prevLevel = pb.high>0?'high':pb.mid>0?'mid':pb.total>0?'ok':'none';
+    const curLevel  = cb.high>0?'high':cb.mid>0?'mid':cb.total>0?'ok':'none';
+
+    if (prevLevel === curLevel && pb.total === cb.total) return; // 변화없음
+
+    let arrow='→', desc='', type='same';
+    if (prevLevel==='high' && curLevel!=='high') { arrow='✅'; type='resolve'; desc=`고위험 → ${curLevel==='mid'?'중위험':'이상없음'} (개선)${cb.conf&&!pb.conf?'':''}`; }
+    else if (prevLevel!=='high' && curLevel==='high') { arrow='🚨'; type='new';     desc=`${prevLevel==='mid'?'중위험':prevLevel==='ok'?'이상없음':'미확인'} → 고위험 (신규 발생)`; }
+    else if (prevLevel==='mid' && curLevel==='ok')    { arrow='✅'; type='resolve'; desc='중위험 → 이상없음 (개선)'; }
+    else if (prevLevel==='ok' && curLevel==='mid')    { arrow='⚠️'; type='new';    desc='이상없음 → 중위험 (신규)'; }
+    else if (pb.total !== cb.total) {
+      const d = cb.total - pb.total;
+      arrow = d>0?'📈':'📉';
+      desc = `공고 ${d>0?'+':''}${d}건 (${pb.total}→${cb.total}건)`;
+      type = 'count';
+    }
+    if (desc) brandChanges.push({name:cb.name, arrow, desc, type});
+  });
+
+  // 신규 고위험 이슈
+  const newHighStores = cur.detail
+    .filter(d=>d.lv==='high')
+    .filter(d=>!prev.detail.find(p=>p.store===d.store&&p.lv==='high'))
+    .map(d=>d.store.replace(/\n/,' '));
+
+  // 해소된 고위험
+  const resolvedStores = prev.detail
+    .filter(d=>d.lv==='high')
+    .filter(d=>!cur.detail.find(c=>c.store===d.store&&c.lv==='high'))
+    .map(d=>d.store.replace(/\n/,' '));
+
+  const brandChangeHtml = brandChanges.length
+    ? brandChanges.map(c=>`
+        <div class="bc-row">
+          <span class="bc-brand">${c.name}</span>
+          <span class="bc-arrow">${c.arrow}</span>
+          <span class="bc-desc ${c.type==='resolve'?'cmp-resolved':c.type==='new'?'cmp-new-risk':'cmp-same'}">${c.desc}</span>
+        </div>`).join('')
+    : '<div style="font-size:12px;color:var(--muted);padding:2px 0">브랜드별 리스크 수준 변화 없음</div>';
+
+  wrap.innerHTML = `
+  <div class="cmp-sec">
+    <div class="cmp-hd">
+      <h2>🔄 전주 대비 변경사항 요약</h2>
+      <span class="cmp-sub">${prev.label} → ${cur.label}</span>
+    </div>
+    <div class="tbl-wrap">
+      <table class="cmp-tbl">
+        <thead><tr>
+          <th style="text-align:left">항목</th>
+          <th class="col-prev">전주 (${prev.label})</th>
+          <th class="col-cur">이번 주 (${cur.label})</th>
+          <th>변화</th>
+          <th style="min-width:160px;text-align:left">비고</th>
+        </tr></thead>
+        <tbody>
+          <tr>
+            <td>📄 공고 수</td>
+            <td>${pT}건</td><td>${cT}건</td>
+            <td>${diff(cT,pT,false)}</td>
+            <td style="text-align:left;font-size:11px;color:var(--sub)">—</td>
+          </tr>
+          <tr>
+            <td>🔴 고위험</td>
+            <td>${pH>0?`<span class="cmp-tag-high">${pH}건</span>`:'없음'}</td>
+            <td>${cH>0?`<span class="cmp-tag-high">${cH}건</span>`:'없음'}</td>
+            <td>${diff(cH,pH,true)}</td>
+            <td style="text-align:left;font-size:11px;color:var(--sub)">
+              ${resolvedStores.length?`✅ 해소: ${resolvedStores.join(', ')}`:''} 
+              ${newHighStores.length?`🚨 신규: ${newHighStores.join(', ')}`:''} 
+              ${!resolvedStores.length&&!newHighStores.length?'—':''}
+            </td>
+          </tr>
+          <tr>
+            <td>🟡 중위험</td>
+            <td>${pM>0?`<span class="cmp-tag-mid">${pM}건</span>`:'없음'}</td>
+            <td>${cM>0?`<span class="cmp-tag-mid">${cM}건</span>`:'없음'}</td>
+            <td>${diff(cM,pM,true)}</td>
+            <td style="text-align:left;font-size:11px;color:var(--sub)">—</td>
+          </tr>
+          <tr>
+            <td>🟢 이상없음</td>
+            <td>${pO}건</td><td>${cO}건</td>
+            <td>${diff(cO,pO,false)}</td>
+            <td style="text-align:left;font-size:11px;color:var(--sub)">—</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="brand-changes">
+      <div style="font-size:12px;font-weight:600;color:var(--text);margin-bottom:6px">브랜드별 변화</div>
+      ${brandChangeHtml}
+    </div>
+  </div>`;
+}
+
+// ════════════════════════════════════════════════════════════════
+//  WEEKLY RENDER
+// ════════════════════════════════════════════════════════════════
+function renderWeekly() {
+  const w = WEEKS[curWeekIdx];
+  // date label
+  document.getElementById('w-date-label').textContent = w.range + ' 기준';
+  document.getElementById('updated-label').textContent = '2026.05.13 업데이트';
+
+  // KPI — detail[]에서 직접 계산 (브랜드 요약과 동일한 소스)
+  const tH = w.detail.filter(d=>d.lv==='high').length;
+  const tM = w.detail.filter(d=>d.lv==='mid').length;
+  const tO = w.detail.filter(d=>d.lv==='ok').length;
+  const tT = w.detail.length;
+  const tA = w.detail.filter(d=>d.lv==='high').length; // 고위험 = 즉시조치
+  document.getElementById('w-kpi').innerHTML = `
+    <div class="kc blue"><div class="kc-lbl">모니터링 브랜드</div><div class="kc-val blue">10</div><div class="kc-sub">이랜드이츠 전 브랜드</div></div>
+    <div class="kc amber"><div class="kc-lbl">공고 확인</div><div class="kc-val amber">${tT}</div><div class="kc-sub">전체 플랫폼 합산</div></div>
+    <div class="kc red"><div class="kc-lbl">리스크 감지</div><div class="kc-val red">${tH+tM}</div><div class="kc-sub">고위험 ${tH} / 중위험 ${tM}</div></div>
+    <div class="kc green"><div class="kc-lbl">이상없음</div><div class="kc-val green">${tO}</div><div class="kc-sub">법적 문제 없음</div></div>
+    <div class="kc${tA?'':''}"${tA?' style="border-top-color:#e24b4a"':''}><div class="kc-lbl">즉시 조치 필요</div><div class="kc-val${tA?' red':''}">${tA}</div><div class="kc-sub">${tA?'긴급 시정 사항':'이상없음'}</div></div>`;
+
+  // Note
+  document.getElementById('w-note').innerHTML = `🔍 <strong>수집 출처:</strong> 알바몬 · 알바천국 · 잡코리아 · 당근알바 · 이랜드이츠 채용몰<br>${w.note}`;
+
+  // Filter btn labels
+  const rows = w.detail;
+  document.getElementById('fb-all').textContent  = `전체 (${rows.length})`;
+  document.getElementById('fb-high').textContent = `🔴 고위험 (${rows.filter(d=>d.lv==='high').length})`;
+  document.getElementById('fb-mid').textContent  = `🟡 중위험 (${rows.filter(d=>d.lv==='mid').length})`;
+  document.getElementById('fb-ok').textContent   = `🟢 이상없음 (${rows.filter(d=>d.lv==='ok').length})`;
+
+  renderComparison();
+  renderBrandTable(w);
+  renderDetailTable(w, curWFilter);
+}
+
+function renderBrandTable(w) {
+  // ★ 핵심: 숫자를 brands[]에서 읽지 않고 detail[]에서 직접 계산
+  //   → 브랜드 요약과 상세 테이블이 항상 자동으로 일치
+  const AUTO_BRANDS = [
+    "애슐리퀸즈","델리By애슐리","자연별곡","로운",
+    "피자몰","리미니","반궁","프랑제리","더카페","페르케노","공통(5개브랜드)"
+  ];
+
+  // detail에서 브랜드별 집계
+  const calc = {};
+  AUTO_BRANDS.forEach(name => { calc[name] = {high:0, mid:0, ok:0, total:0, act:0}; });
+  w.detail.forEach(d => {
+    const key = AUTO_BRANDS.includes(d.brand) ? d.brand : null;
+    if (!key) return;
+    calc[key].total++;
+    if (d.lv==='high') { calc[key].high++; calc[key].act++; }
+    else if (d.lv==='mid') calc[key].mid++;
+    else calc[key].ok++;
+  });
+
+  // brands[]는 conf(미확인여부)와 risk(주요리스크 텍스트)만 참조
+  const brandMeta = {};
+  w.brands.forEach(b => { brandMeta[b.name] = { conf: b.conf, risk: b.risk }; });
+
+  let tT=0,tH=0,tM=0,tO=0,tA=0;
+  document.getElementById('w-brand-tbody').innerHTML = AUTO_BRANDS.map(name => {
+    const c = calc[name];
+    const meta = brandMeta[name] || { conf: false, risk: '' };
+    tT+=c.total; tH+=c.high; tM+=c.mid; tO+=c.ok; tA+=c.act;
+
+    const hn = c.high ? `<span class="num-h">${c.high}</span>` : `<span class="num-z">—</span>`;
+    const mn = c.mid  ? `<span class="num-m">${c.mid}</span>`  : `<span class="num-z">—</span>`;
+    const on = c.ok   ? `<span class="num-o">${c.ok}</span>`   : `<span class="num-z">—</span>`;
+    const tn = c.total? `<span class="num-t">${c.total}</span>`: `<span class="num-z">—</span>`;
+    const act = c.act ? `<span class="st-r">⛔ ${c.act}건</span>` : `<span class="st-g">없음</span>`;
+    const tot = c.total || 1;
+    const bar = c.total
+      ? `<div class="bar-wrap">
+           <div class="bar-h" style="width:${Math.round(c.high/tot*100)}%"></div>
+           <div class="bar-m" style="width:${Math.round(c.mid/tot*100)}%"></div>
+           <div class="bar-o" style="width:${Math.round(c.ok/tot*100)}%"></div>
+         </div>` : '';
+
+    // 주요 리스크 텍스트: brands[]의 risk 사용 (미확인 브랜드 포함)
+    let riskHtml;
+    if (!meta.conf && c.total === 0) {
+      riskHtml = `<span class="unconf">공고 미확인 — 현장 확인 필요</span>`;
+    } else if (c.high > 0) {
+      riskHtml = `<span style="font-size:12px;color:#b02a10;font-weight:600">${meta.risk||'고위험 공고 있음'}</span>`;
+    } else if (c.mid > 0) {
+      riskHtml = `<span style="font-size:12px;color:#875900">${meta.risk||'중위험 공고 있음'}</span>`;
+    } else if (c.total > 0) {
+      riskHtml = `<span style="font-size:12px;color:#1a6645">${meta.risk||'이상없음'}</span>`;
+    } else {
+      riskHtml = `<span class="num-z">—</span>`;
+    }
+
+    return `<tr>
+      <td style="text-align:left"><span class="bpill${meta.conf||c.total>0?'':' none'}">${name}</span></td>
+      <td>${tn}${bar}</td>
+      <td>${hn}</td><td>${mn}</td><td>${on}</td>
+      <td style="text-align:left">${riskHtml}</td>
+      <td>${act}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('wf-t').textContent = tT;
+  document.getElementById('wf-h').textContent = tH;
+  document.getElementById('wf-m').textContent = tM;
+  document.getElementById('wf-o').textContent = tO;
+  document.getElementById('wf-a').innerHTML = tA
+    ? `<span style="color:#b02a10;font-weight:700">${tA}건</span>` : '없음';
+}
+
+function renderDetailTable(w, lv) {
+  const rows = lv==='all' ? w.detail : w.detail.filter(d=>d.lv===lv);
+  document.getElementById('w-cnt').textContent = rows.length + '건 표시';
+  const tb = document.getElementById('w-detail-tbody');
+  if (!rows.length) { tb.innerHTML='<tr><td colspan="8" style="text-align:center;padding:2rem;color:var(--muted)">해당 조건의 공고 없음</td></tr>'; return; }
+  tb.innerHTML = rows.map((d,i) => {
+    const dc  = d.lv==='ok'?'rdot-ok':d.lv==='high'?'rdot-high':'rdot-mid';
+    const nc  = d.lv==='ok'?'sname-ok':d.lv==='high'?'sname-high':'sname-mid';
+    const nameHtml = d.url
+      ? `<a class="slink" href="${d.url}" target="_blank" rel="noopener"><span class="rdot ${dc}"></span><span class="${nc}">${d.store.replace(/\n/g,'<br>')}</span><span class="ico">↗</span></a>`
+      : `<span class="rdot ${dc}"></span><span class="${nc}">${d.store}</span>`;
+    const laws = d.law.map(l=>`<span class="law-tag">${l}</span>`).join('');
+    const rc   = d.lv==='ok'?'ok':d.lv;
+    return`<tr>
+      <td style="font-size:11px;color:var(--muted)">${i+1}</td>
+      <td style="min-width:140px">${nameHtml}</td>
+      <td><span class="bpill" style="font-size:10px">${d.brand}</span></td>
+      <td><span class="plt-tag">${d.plt}</span></td>
+      <td style="font-size:12px;color:var(--sub)">${d.sum}</td>
+      <td><span class="rt ${rc}">${d.risk.replace(/\n/g,'<br>')}</span>${laws?`<div class="law-wrap">${laws}</div>`:''}</td>
+      <td><span class="lv-badge ${BLC[d.lv]}">${LVM[d.lv]}</span></td>
+      <td>${STMP[d.st]}</td>
+    </tr>`;
+  }).join('');
+}
+
+function wflt(lv, btn) {
+  curWFilter = lv;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderDetailTable(WEEKS[curWeekIdx], lv);
+}
+
+// ════════════════════════════════════════════════════════════════
+//  CUMULATIVE RENDER
+// ════════════════════════════════════════════════════════════════
+function renderCumulative() {
+  const allDetail = WEEKS.flatMap(w => w.detail);
+  const totH = WEEKS.reduce((s,w)=>s+w.brands.reduce((a,b)=>a+b.high,0),0);
+  const totM = WEEKS.reduce((s,w)=>s+w.brands.reduce((a,b)=>a+b.mid,0),0);
+  const totO = WEEKS.reduce((s,w)=>s+w.brands.reduce((a,b)=>a+b.ok,0),0);
+  const totT = allDetail.length;
+
+  // KPI
+  document.getElementById('c-kpi').innerHTML = `
+    <div class="kc blue"><div class="kc-lbl">모니터링 주차</div><div class="kc-val blue">${WEEKS.length}</div><div class="kc-sub">${WEEKS[0].label} ~ ${WEEKS[WEEKS.length-1].label}</div></div>
+    <div class="kc amber"><div class="kc-lbl">누적 공고</div><div class="kc-val amber">${totT}</div><div class="kc-sub">전체 플랫폼 합산</div></div>
+    <div class="kc red"><div class="kc-lbl">누적 리스크</div><div class="kc-val red">${totH+totM}</div><div class="kc-sub">고위험 ${totH} / 중위험 ${totM}</div></div>
+    <div class="kc green"><div class="kc-lbl">이상없음</div><div class="kc-val green">${totO}</div><div class="kc-sub">법적 문제 없음</div></div>
+    <div class="kc"><div class="kc-lbl">위험률</div><div class="kc-val${totH>0?' red':' amber'}">${totT?Math.round((totH+totM)/totT*100):0}%</div><div class="kc-sub">전체 공고 대비</div></div>`;
+
+  document.getElementById('c-range-label').textContent = `${WEEKS[0].range} ~ ${WEEKS[WEEKS.length-1].range}`;
+
+  // 막대 차트
+  const maxTotal = Math.max(...WEEKS.map(w=>w.detail.length), 1);
+  document.getElementById('c-chart').innerHTML = WEEKS.map(w => {
+    const wH=w.brands.reduce((s,b)=>s+b.high,0);
+    const wM=w.brands.reduce((s,b)=>s+b.mid,0);
+    const wO=w.brands.reduce((s,b)=>s+b.ok,0);
+    const total=w.detail.length;
+    const pct = h => Math.round(h/maxTotal*100);
+    return`<div class="bar-col">
+      <div class="bar-col-label">${w.label}</div>
+      <div class="bar-stacked" style="height:${pct(total)}%">
+        <div class="bso" style="flex:${wO}"></div>
+        <div class="bsm" style="flex:${wM}"></div>
+        <div class="bsh" style="flex:${wH}"></div>
+      </div>
+      <div class="bar-val">${total}</div>
+    </div>`;
+  }).join('');
+
+  // 브랜드별 트렌드 (수평 바)
+  const brandNames = [...new Set(WEEKS.flatMap(w=>w.brands.map(b=>b.name)))];
+  const brandRisk = {};
+  WEEKS.forEach(w => w.brands.forEach(b => {
+    if (!brandRisk[b.name]) brandRisk[b.name]={high:0,mid:0,total:0};
+    brandRisk[b.name].high+=b.high;
+    brandRisk[b.name].mid+=b.mid;
+    brandRisk[b.name].total+=b.total;
+  }));
+  const maxRisk = Math.max(...Object.values(brandRisk).map(b=>b.high+b.mid),1);
+  document.getElementById('c-trend').innerHTML = brandNames
+    .filter(n=>brandRisk[n].total>0)
+    .sort((a,b)=>(brandRisk[b].high+brandRisk[b].mid)-(brandRisk[a].high+brandRisk[a].mid))
+    .map(n=>{
+      const r=brandRisk[n];
+      const risk=r.high+r.mid;
+      const pct=Math.round(risk/maxRisk*100);
+      const color=r.high>0?'#e24b4a':r.mid>0?'#c8973a':'#3b9e75';
+      return`<div class="trend-row">
+        <div class="trend-lbl">${n}</div>
+        <div class="trend-bar-wrap">
+          <div class="trend-bar" style="width:${pct}%;background:${color}">${risk>0?risk:''}</div>
+        </div>
+        <div class="trend-count">${risk}</div>
+      </div>`;
+    }).join('');
+
+  // 브랜드별 누적 집계표
+  const confBrands = brandNames.filter(n => WEEKS.some(w=>w.brands.find(b=>b.name===n&&b.conf)));
+  document.getElementById('c-brand-tbody').innerHTML = confBrands.map(n => {
+    const r = brandRisk[n]||{high:0,mid:0,total:0};
+    const risk=r.high+r.mid;
+    const pct=r.total?Math.round(risk/r.total*100):0;
+    const latestWeek = [...WEEKS].reverse().find(w=>w.brands.find(b=>b.name===n&&b.conf));
+    const latest = latestWeek?.brands.find(b=>b.name===n);
+    const latestHtml = !latest?'—':latest.high?`<span class="st-r">고위험</span>`:latest.mid?`<span class="st-w">중위험</span>`:`<span class="st-g">이상없음</span>`;
+    return`<tr>
+      <td style="text-align:left"><span class="bpill">${n}</span></td>
+      <td>${r.total}</td>
+      <td>${r.high?`<span class="num-h">${r.high}</span>`:`<span class="num-z">—</span>`}</td>
+      <td>${(r.mid||0)?`<span class="num-m">${r.mid}</span>`:`<span class="num-z">—</span>`}</td>
+      <td>${(r.total-risk)?`<span class="num-o">${r.total-risk}</span>`:`<span class="num-z">—</span>`}</td>
+      <td><span style="font-weight:600;color:${pct>=30?'#b02a10':pct>=10?'#875900':'#1a6645'}">${pct}%</span></td>
+      <td>${latestHtml}</td>
+    </tr>`;
+  }).join('');
+
+  const cumT=Object.values(brandRisk).reduce((s,b)=>s+b.total,0);
+  const cumH=Object.values(brandRisk).reduce((s,b)=>s+b.high,0);
+  const cumM=Object.values(brandRisk).reduce((s,b)=>s+(b.mid||0),0);
+  const cumO=cumT-cumH-cumM;
+  document.getElementById('c-brand-tfoot').innerHTML=`<td>합계</td><td>${cumT}</td><td style="color:#b02a10">${cumH}</td><td style="color:#875900">${cumM}</td><td style="color:#1a6645">${cumO}</td><td style="font-weight:700">${cumT?Math.round((cumH+cumM)/cumT*100):0}%</td><td></td>`;
+
+  // 고위험 타임라인
+  const highItems = WEEKS.flatMap(w =>
+    w.detail.filter(d=>d.lv==='high').map(d=>({week:w.range,weekLabel:w.label,store:d.store,risk:d.risk,brand:d.brand}))
+  );
+  document.getElementById('c-timeline').innerHTML = highItems.length
+    ? highItems.map((item, i) => `
+      <div class="tl-item">
+        <div class="tl-week">${item.weekLabel}</div>
+        <div class="tl-dot-wrap">
+          <div class="tl-dot" style="background:#e24b4a"></div>
+          ${i<highItems.length-1?'<div class="tl-line"></div>':''}
+        </div>
+        <div class="tl-content">
+          <div class="tl-store high">${item.store.replace(/\n/,' ')}</div>
+          <div class="tl-risk"><span class="tl-badge lv-high">고위험</span><span style="font-size:11px;color:var(--sub)">${item.brand}</span><br>${item.risk}</div>
+        </div>
+      </div>`).join('')
+    : '<p style="color:var(--muted);font-size:13px;text-align:center;padding:20px">고위험 이슈 없음</p>';
+}
+
+// ════════════════════════════════════════════════════════════════
+//  MODALS
+// ════════════════════════════════════════════════════════════════
+const MODALS = {
+  expired:{
+    title:"📋 마감된 잡코리아 공고 방치 문제",
+    body:`<div class="mo-sec"><h3>현황</h3><div class="alert-box">잡코리아 2026년 1분기 신입 채용 공고<br>마감일: <strong>2026.01.28</strong> → 현재(05.06 기준) <strong>약 4개월 경과 후에도 계속 노출</strong><br>2주 연속 미조치 확인</div></div>
+    <div class="mo-sec"><h3>위반 소지</h3><p>채용절차의 공정화에 관한 법률 제4조 위반 소지<br>과태료: <strong>500만원 이하</strong></p></div>
+    <div class="mo-sec"><h3>즉시 시정</h3><p>① 잡코리아 기업 담당자에게 즉시 공고 삭제 요청<br>② 향후 공고 마감일 자동 삭제 설정 확인<br>③ 모든 플랫폼 주 1회 정기 점검 체계 수립</p></div>`
+  },
+  email:{
+    title:"✉️ 주간 이메일 보고서 발송 안내",
+    body:`<div class="mo-sec"><h3>발송 일정</h3><p>매주 <strong>월~일 공고 수집</strong> → 매주 <strong>화요일</strong> 보고서 발송<br>수신: <strong>shinhw@eland.co.kr</strong></p></div>
+    <div class="mo-sec"><h3>PDF로 저장 후 이메일 첨부</h3><p>① 오른쪽 상단 <strong>🖨️ PDF 저장</strong> 클릭<br>② 인쇄 화면에서 <strong>"PDF로 저장"</strong> 선택<br>③ 저장된 PDF를 이메일에 첨부하여 발송</p></div>
+    <div class="mo-sec"><h3>GitHub 업데이트 방법</h3><p>① Claude에게 새 주차 크롤링 요청<br>② 받은 파일 이름을 <code>index.html</code>로 변경<br>③ GitHub → Add file → Upload files → Commit</p></div>`
+  }
+};
+function showMo(k){const m=MODALS[k];document.getElementById('mo-title').textContent=m.title;document.getElementById('mo-body').innerHTML=m.body;document.getElementById('mo-ov').classList.add('open');}
+function closeMo(e){if(e.target===document.getElementById('mo-ov'))document.getElementById('mo-ov').classList.remove('open');}
+
+// ════════════════════════════════════════════════════════════════
+//  INIT
+// ════════════════════════════════════════════════════════════════
+buildWeekTabs();
+renderWeekly();
+</script>
+</body>
+</html>
