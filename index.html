@@ -773,8 +773,213 @@ const WEEKS = [
   },
 
   // ─────────────────────────────────────────────────────────────
+  // 주차 4 : 2026.05.11 ~ 05.17
+  // ─────────────────────────────────────────────────────────────
+  {
+    id: "w4",
+    label: "5/11~5/17",
+    range: "2026.05.11 ~ 05.17",
+    note: "알바몬 · 잡코리아 · 이랜드이츠 채용몰 (2026.05.21 검색) | 미확인: 자연별곡·반궁·프랑제리·더카페·페르케노 | ✅ 잡코리아 1분기 마감공고 삭제 확인(4주만에 해소) | ⚠️ 피자몰·델리By애슐리 반복 미조치 지속",
+    brands: [
+      { name:"애슐리퀸즈",     conf:true,  risk:"롯데아울렛 기흥점 시급 12,000원 주휴포함 여부 미명시 — 기본시급 명시 필요" },
+      { name:"델리By애슐리",   conf:true,  risk:"평촌킴스점 기본시급 미표기 4주 연속 미조치 — 담당 매장 직접 시정 필요" },
+      { name:"자연별곡",       conf:false, risk:"" },
+      { name:"로운",           conf:true,  risk:"이상없음" },
+      { name:"피자몰",         conf:true,  risk:"초단시간 주휴수당 미고지(2건) 4주 연속 미조치, 이메일 지원 서류반환 미안내 4주 연속" },
+      { name:"리미니",         conf:true,  risk:"이상없음" },
+      { name:"반궁",           conf:false, risk:"" },
+      { name:"프랑제리",       conf:false, risk:"" },
+      { name:"더카페",         conf:false, risk:"" },
+      { name:"페르케노",       conf:false, risk:"" },
+      { name:"공통(5개브랜드)",conf:true,  risk:"✅ 잡코리아 1분기 마감공고 삭제 확인. 2분기 채용몰 공고 마감(5/10) 후 정상 삭제 확인" },
+    ],
+    detail: [
+      // ── 애슐리퀸즈 ──────────────────────────────────────────────
+      { store:"애슐리퀸즈 홈플러스 인천청라점 (주방)",
+        url:"https://m.albamon.com/jobs/detail/116600124",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 시급 10,400원, 3~6개월",
+        risk:"시급 10,400원만 기재 — 주휴포함 여부 미명시. 기본시급 명시 필요(최저임금법 제6조 위반 예방)",
+        law:["최저임금법"], lv:"mid", st:"검토중" },
+
+      { store:"애슐리퀸즈 홈플러스 인천청라점 (홀)",
+        url:"https://m.albamon.com/jobs/detail/116339911",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"홀, 기본시급 10,400원(주휴포함 12,480원), 3~6개월",
+        risk:"이상없음 — 기본·주휴포함 시급 구분 명시",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 롯데몰 군산점",
+        url:"https://m.albamon.com/jobs/detail/116489649",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"홀/주방, 시급 10,320원, 3~6개월",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 원더아리아 청주점",
+        url:"https://m.albamon.com/jobs/detail/116367864",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주말 홀, 주휴포함 12,384원, 1~3개월",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"이랜드이츠 본부 — 애슐리퀸즈 이마트 월배점",
+        url:"https://m.albamon.com/jobs/detail/116404664",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 기본시급 10,500원(주휴포함 12,600원)",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 롯데아울렛 기흥점",
+        url:"https://m.albamon.com/jobs/detail/116612040",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 시급 12,000원, 3~6개월",
+        risk:"시급 12,000원 — 주휴포함 여부 미명시 2주 연속. 기본시급인지 주휴포함인지 불명확(최저임금법 제6조 위반 예방)",
+        law:["최저임금법"], lv:"mid", st:"미조치" },
+
+      { store:"애슐리퀸즈 스타필드빌리지 운정점 (주방)",
+        url:"https://m.albamon.com/jobs/detail/116447197",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 바로채용",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 킨텍스점 (주방마감)",
+        url:"https://m.albamon.com/jobs/detail/116395031",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방 마감, 시급 10,320원, 주휴포함 12,400원대",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 AK수원점",
+        url:"https://m.albamon.com/jobs/detail/116594049",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방, 기본시급 10,500원(주휴포함 12,600원)",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 전주STS점",
+        url:"https://m.albamon.com/jobs/detail/116593995",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"주방/세척, 시급 10,320원, 3~6개월",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 롯데몰 은평점",
+        url:"https://m.albamon.com/jobs/detail/116380235",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"홀, 기본시급 10,320원(주휴포함 12,384원)",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 이마트 목동점",
+        url:"https://m.albamon.com/jobs/detail/116471439",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"홀, 기본시급 10,320원(주휴포함 12,384원)",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"애슐리퀸즈 뉴코아 천호점 (홀)",
+        url:"https://m.albamon.com/jobs/detail/116473730",
+        brand:"애슐리퀸즈", plt:"알바몬",
+        sum:"홀, 기본시급 10,400원(주휴포함 12,480원), 즉시채용",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"이랜드이츠 채용몰 — 애슐리퀸즈 매장관리자",
+        url:"https://elandeats.career.greetinghr.com/ko/o/201343",
+        brand:"애슐리퀸즈", plt:"이랜드이츠 채용몰",
+        sum:"신입/경력, 정규직, 상시",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 델리By애슐리 ──────────────────────────────────────────
+      { store:"델리BY애슐리 평촌킴스점",
+        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        brand:"델리By애슐리", plt:"알바몬",
+        sum:"주방, 주휴포함 시급 단독 표기, 4주 연속 동일",
+        risk:"4주 연속 기본시급 미표기 미조치 — 담당 매장 직접 시정 요청 필요(최저임금법 제6조)",
+        law:["최저임금법"], lv:"mid", st:"미조치" },
+
+      { store:"델리BY애슐리 야탑킴스점",
+        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        brand:"델리By애슐리", plt:"알바몬",
+        sum:"주방, 주휴포함 12,360원",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      { store:"델리BY애슐리 구로킴스점",
+        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        brand:"델리By애슐리", plt:"알바몬",
+        sum:"주방, 주휴포함 12,360원, 상시모집",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 로운 ──────────────────────────────────────────────────
+      { store:"로운 샤브샤브 매장관리자",
+        url:"https://elandeats.career.greetinghr.com/ko/o/200949",
+        brand:"로운", plt:"이랜드이츠 채용몰",
+        sum:"스토어매니저, 신입/경력, 정규직, 상시",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 피자몰 ────────────────────────────────────────────────
+      { store:"피자몰 NC강서점",
+        url:"https://www.albamon.com/jobs/detail/116238046",
+        brand:"피자몰", plt:"알바몬",
+        sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 2026-05-10 경과",
+        risk:"마감일(5/10) 경과 후에도 공고 계속 노출 — 마감 공고 방치. 채용절차법 제4조 위반 소지. 즉시 삭제 요청 필요",
+        law:["채용절차법"], lv:"high", st:"미조치" },
+
+      { store:"피자몰 뉴코아평촌점",
+        url:"https://www.albamon.com/jobs/detail/116210355",
+        brand:"피자몰", plt:"알바몬",
+        sum:"주방 주말 초단시간, 시급 10,320원, 상시모집",
+        risk:"초단시간 주휴수당 적용 기준 미명시 4주 연속 미조치(근로기준법 제18조)",
+        law:["근로기준법"], lv:"mid", st:"미조치" },
+
+      { store:"피자몰 대구이월드점 (4/26·지속)",
+        url:"https://www.albamon.com/jobs/detail/116205398",
+        brand:"피자몰", plt:"알바몬",
+        sum:"초단시간, 시급 10,320원, 1~3개월",
+        risk:"초단시간+단기계약 주휴수당 미고지 3주 연속(근로기준법 제17조·제18조)",
+        law:["근로기준법"], lv:"mid", st:"검토중" },
+
+      { store:"피자몰 대구이월드점 (4/23·지속)",
+        url:"https://www.albamon.com/jobs/detail/116167761",
+        brand:"피자몰", plt:"알바몬",
+        sum:"초단시간, 시급 10,320원, 4/23 등록 후 4주 지속 노출",
+        risk:"동일 매장 중복 공고 4주 지속 — 즉시 통합 또는 삭제 필요(근로기준법 제18조)",
+        law:["근로기준법"], lv:"mid", st:"미조치" },
+
+      { store:"피자몰 NC신구로점",
+        url:"https://www.albamon.com/jobs/detail/116166782",
+        brand:"피자몰", plt:"알바몬",
+        sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",
+        risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 4주 연속 미확인(채용절차법 제11조)",
+        law:["채용절차법"], lv:"mid", st:"미조치" },
+
+      // ── 리미니 ────────────────────────────────────────────────
+      { store:"리미니 매장관리자",
+        url:"https://elandeats.career.greetinghr.com/ko/o/202247",
+        brand:"리미니", plt:"이랜드이츠 채용몰",
+        sum:"신입/경력, 정규직, 상시",
+        risk:"이상없음",
+        law:[], lv:"ok", st:"완료" },
+
+      // ── 공통 ──────────────────────────────────────────────────
+      { store:"✅ 잡코리아 1분기 마감공고 삭제 확인\n(애슐리퀸즈·피자몰·로운·자연별곡·리미니)",
+        url:"https://www.jobkorea.co.kr/company/16153250/recruit",
+        brand:"공통(5개브랜드)", plt:"잡코리아",
+        sum:"진행 중 공고 0건 확인 — 마감 공고 삭제 완료",
+        risk:"이상없음 — 4주 연속 지적 사항 해소 확인. 잡코리아 이랜드이츠 기업 페이지 진행중 공고 0건",
+        law:[], lv:"ok", st:"완료" },
+    ]
+  },
+
+  // ─────────────────────────────────────────────────────────────
   // 다음 주차는 아래에 동일한 형식으로 추가하세요 👇
-  // { id:"w4", label:"5/11~17", range:"2026.05.11 ~ 05.17", note:"...", brands:[...], detail:[...] },
+  // { id:"w5", label:"5/18~24", range:"2026.05.18 ~ 05.24", note:"...", brands:[...], detail:[...] },
   // ─────────────────────────────────────────────────────────────
 
 ];
@@ -968,7 +1173,7 @@ function renderWeekly() {
   const w = WEEKS[curWeekIdx];
   // date label
   document.getElementById('w-date-label').textContent = w.range + ' 기준';
-  document.getElementById('updated-label').textContent = '2026.05.13 업데이트';
+  document.getElementById('updated-label').textContent = '2026.05.21 업데이트';
 
   // KPI — detail[]에서 직접 계산 (브랜드 요약과 동일한 소스)
   const tH = w.detail.filter(d=>d.lv==='high').length;
