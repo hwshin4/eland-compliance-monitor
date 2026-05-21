@@ -1011,7 +1011,7 @@ function switchView(v, btn) {
 function buildWeekTabs() {
   const wrap = document.getElementById('week-tabs');
   wrap.innerHTML = WEEKS.map((w, i) => {
-    const hasHigh = w.brands.some(b => b.high > 0);
+    const hasHigh = w.detail.some(d => d.lv === 'high');
     return `<div class="wtab${i === curWeekIdx ? ' on' : ''}${hasHigh ? ' has-high' : ''}" onclick="selectWeek(${i},this)">
       ${w.label}${hasHigh ? ' 🔴' : ''}
     </div>`;
@@ -1311,16 +1311,22 @@ function wflt(lv, btn) {
 }
 
 // ════════════════════════════════════════════════════════════════
-//  CUMULATIVE RENDER
+//  CUMULATIVE RENDER — 모두 detail[]에서 자동 계산
 // ════════════════════════════════════════════════════════════════
 function renderCumulative() {
+  const AUTO_BRANDS = [
+    "애슐리퀸즈","델리By애슐리","자연별곡","로운",
+    "피자몰","리미니","반궁","프랑제리","더카페","페르케노","공통(5개브랜드)"
+  ];
+
+  // ── 전체 누적 집계 (detail 기반) ────────────────────────────
   const allDetail = WEEKS.flatMap(w => w.detail);
-  const totH = WEEKS.reduce((s,w)=>s+w.brands.reduce((a,b)=>a+b.high,0),0);
-  const totM = WEEKS.reduce((s,w)=>s+w.brands.reduce((a,b)=>a+b.mid,0),0);
-  const totO = WEEKS.reduce((s,w)=>s+w.brands.reduce((a,b)=>a+b.ok,0),0);
+  const totH = allDetail.filter(d=>d.lv==='high').length;
+  const totM = allDetail.filter(d=>d.lv==='mid').length;
+  const totO = allDetail.filter(d=>d.lv==='ok').length;
   const totT = allDetail.length;
 
-  // KPI
+  // ── KPI ─────────────────────────────────────────────────────
   document.getElementById('c-kpi').innerHTML = `
     <div class="kc blue"><div class="kc-lbl">모니터링 주차</div><div class="kc-val blue">${WEEKS.length}</div><div class="kc-sub">${WEEKS[0].label} ~ ${WEEKS[WEEKS.length-1].label}</div></div>
     <div class="kc amber"><div class="kc-lbl">누적 공고</div><div class="kc-val amber">${totT}</div><div class="kc-sub">전체 플랫폼 합산</div></div>
@@ -1330,13 +1336,13 @@ function renderCumulative() {
 
   document.getElementById('c-range-label').textContent = `${WEEKS[0].range} ~ ${WEEKS[WEEKS.length-1].range}`;
 
-  // 막대 차트
+  // ── 주차별 막대 차트 (detail 기반) ──────────────────────────
   const maxTotal = Math.max(...WEEKS.map(w=>w.detail.length), 1);
   document.getElementById('c-chart').innerHTML = WEEKS.map(w => {
-    const wH=w.brands.reduce((s,b)=>s+b.high,0);
-    const wM=w.brands.reduce((s,b)=>s+b.mid,0);
-    const wO=w.brands.reduce((s,b)=>s+b.ok,0);
-    const total=w.detail.length;
+    const wH = w.detail.filter(d=>d.lv==='high').length;
+    const wM = w.detail.filter(d=>d.lv==='mid').length;
+    const wO = w.detail.filter(d=>d.lv==='ok').length;
+    const total = w.detail.length;
     const pct = h => Math.round(h/maxTotal*100);
     return`<div class="bar-col">
       <div class="bar-col-label">${w.label}</div>
@@ -1349,62 +1355,83 @@ function renderCumulative() {
     </div>`;
   }).join('');
 
-  // 브랜드별 트렌드 (수평 바)
-  const brandNames = [...new Set(WEEKS.flatMap(w=>w.brands.map(b=>b.name)))];
+  // ── 브랜드별 누적 집계 (detail 기반) ────────────────────────
   const brandRisk = {};
-  WEEKS.forEach(w => w.brands.forEach(b => {
-    if (!brandRisk[b.name]) brandRisk[b.name]={high:0,mid:0,total:0};
-    brandRisk[b.name].high+=b.high;
-    brandRisk[b.name].mid+=b.mid;
-    brandRisk[b.name].total+=b.total;
-  }));
-  const maxRisk = Math.max(...Object.values(brandRisk).map(b=>b.high+b.mid),1);
-  document.getElementById('c-trend').innerHTML = brandNames
-    .filter(n=>brandRisk[n].total>0)
-    .sort((a,b)=>(brandRisk[b].high+brandRisk[b].mid)-(brandRisk[a].high+brandRisk[a].mid))
-    .map(n=>{
-      const r=brandRisk[n];
-      const risk=r.high+r.mid;
-      const pct=Math.round(risk/maxRisk*100);
-      const color=r.high>0?'#e24b4a':r.mid>0?'#c8973a':'#3b9e75';
+  AUTO_BRANDS.forEach(n => { brandRisk[n] = {high:0, mid:0, ok:0, total:0}; });
+  WEEKS.forEach(w => {
+    w.detail.forEach(d => {
+      if (!brandRisk[d.brand]) return;
+      brandRisk[d.brand].total++;
+      if (d.lv==='high')      brandRisk[d.brand].high++;
+      else if (d.lv==='mid')  brandRisk[d.brand].mid++;
+      else                     brandRisk[d.brand].ok++;
+    });
+  });
+
+  // ── 브랜드별 트렌드 수평 바 ──────────────────────────────────
+  const maxRisk = Math.max(...AUTO_BRANDS.map(n=>brandRisk[n].high+brandRisk[n].mid), 1);
+  document.getElementById('c-trend').innerHTML = AUTO_BRANDS
+    .filter(n => brandRisk[n].total > 0)
+    .sort((a,b) => (brandRisk[b].high+brandRisk[b].mid) - (brandRisk[a].high+brandRisk[a].mid))
+    .map(n => {
+      const r = brandRisk[n];
+      const risk = r.high + r.mid;
+      const pct = Math.round(risk/maxRisk*100);
+      const color = r.high>0?'#e24b4a':r.mid>0?'#c8973a':'#3b9e75';
       return`<div class="trend-row">
         <div class="trend-lbl">${n}</div>
         <div class="trend-bar-wrap">
-          <div class="trend-bar" style="width:${pct}%;background:${color}">${risk>0?risk:''}</div>
+          <div class="trend-bar" style="width:${Math.max(pct,2)}%;background:${color}">${risk>0?risk:''}</div>
         </div>
         <div class="trend-count">${risk}</div>
       </div>`;
     }).join('');
 
-  // 브랜드별 누적 집계표
-  const confBrands = brandNames.filter(n => WEEKS.some(w=>w.brands.find(b=>b.name===n&&b.conf)));
-  document.getElementById('c-brand-tbody').innerHTML = confBrands.map(n => {
-    const r = brandRisk[n]||{high:0,mid:0,total:0};
-    const risk=r.high+r.mid;
-    const pct=r.total?Math.round(risk/r.total*100):0;
-    const latestWeek = [...WEEKS].reverse().find(w=>w.brands.find(b=>b.name===n&&b.conf));
-    const latest = latestWeek?.brands.find(b=>b.name===n);
-    const latestHtml = !latest?'—':latest.high?`<span class="st-r">고위험</span>`:latest.mid?`<span class="st-w">중위험</span>`:`<span class="st-g">이상없음</span>`;
+  // ── 브랜드별 누적 집계표 ────────────────────────────────────
+  const activeBrands = AUTO_BRANDS.filter(n => brandRisk[n].total > 0);
+  document.getElementById('c-brand-tbody').innerHTML = activeBrands.map(n => {
+    const r = brandRisk[n];
+    const risk = r.high + r.mid;
+    const pct = r.total ? Math.round(risk/r.total*100) : 0;
+    // 최근 주차 상태: detail에서 해당 브랜드 마지막 주차 lv 확인
+    const latestWeek = [...WEEKS].reverse().find(w => w.detail.some(d=>d.brand===n));
+    const latestDetail = latestWeek?.detail.filter(d=>d.brand===n) || [];
+    const hasHigh = latestDetail.some(d=>d.lv==='high');
+    const hasMid  = latestDetail.some(d=>d.lv==='mid');
+    const latestHtml = latestDetail.length===0?'—':
+      hasHigh?`<span class="st-r">고위험</span>`:
+      hasMid?`<span class="st-w">중위험</span>`:
+      `<span class="st-g">이상없음</span>`;
     return`<tr>
       <td style="text-align:left"><span class="bpill">${n}</span></td>
       <td>${r.total}</td>
       <td>${r.high?`<span class="num-h">${r.high}</span>`:`<span class="num-z">—</span>`}</td>
-      <td>${(r.mid||0)?`<span class="num-m">${r.mid}</span>`:`<span class="num-z">—</span>`}</td>
-      <td>${(r.total-risk)?`<span class="num-o">${r.total-risk}</span>`:`<span class="num-z">—</span>`}</td>
+      <td>${r.mid?`<span class="num-m">${r.mid}</span>`:`<span class="num-z">—</span>`}</td>
+      <td>${r.ok?`<span class="num-o">${r.ok}</span>`:`<span class="num-z">—</span>`}</td>
       <td><span style="font-weight:600;color:${pct>=30?'#b02a10':pct>=10?'#875900':'#1a6645'}">${pct}%</span></td>
       <td>${latestHtml}</td>
     </tr>`;
   }).join('');
 
-  const cumT=Object.values(brandRisk).reduce((s,b)=>s+b.total,0);
-  const cumH=Object.values(brandRisk).reduce((s,b)=>s+b.high,0);
-  const cumM=Object.values(brandRisk).reduce((s,b)=>s+(b.mid||0),0);
-  const cumO=cumT-cumH-cumM;
-  document.getElementById('c-brand-tfoot').innerHTML=`<td>합계</td><td>${cumT}</td><td style="color:#b02a10">${cumH}</td><td style="color:#875900">${cumM}</td><td style="color:#1a6645">${cumO}</td><td style="font-weight:700">${cumT?Math.round((cumH+cumM)/cumT*100):0}%</td><td></td>`;
+  // 합계 행
+  const cumT = AUTO_BRANDS.reduce((s,n)=>s+brandRisk[n].total,0);
+  const cumH = AUTO_BRANDS.reduce((s,n)=>s+brandRisk[n].high,0);
+  const cumM = AUTO_BRANDS.reduce((s,n)=>s+brandRisk[n].mid,0);
+  const cumO = AUTO_BRANDS.reduce((s,n)=>s+brandRisk[n].ok,0);
+  document.getElementById('c-brand-tfoot').innerHTML = `
+    <td>합계</td>
+    <td>${cumT}</td>
+    <td style="color:#b02a10">${cumH}</td>
+    <td style="color:#875900">${cumM}</td>
+    <td style="color:#1a6645">${cumO}</td>
+    <td style="font-weight:700">${cumT?Math.round((cumH+cumM)/cumT*100):0}%</td>
+    <td></td>`;
 
-  // 고위험 타임라인
+  // ── 고위험 타임라인 ──────────────────────────────────────────
   const highItems = WEEKS.flatMap(w =>
-    w.detail.filter(d=>d.lv==='high').map(d=>({week:w.range,weekLabel:w.label,store:d.store,risk:d.risk,brand:d.brand}))
+    w.detail.filter(d=>d.lv==='high').map(d=>({
+      weekLabel:w.label, store:d.store, risk:d.risk, brand:d.brand
+    }))
   );
   document.getElementById('c-timeline').innerHTML = highItems.length
     ? highItems.map((item, i) => `
