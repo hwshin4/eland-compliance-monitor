@@ -246,6 +246,16 @@ table.cmp-tbl tbody tr:hover td{background:#fafaf8}
 .bc-arrow{font-size:14px;flex-shrink:0;width:18px;text-align:center}
 .bc-desc{color:var(--sub);flex:1;line-height:1.55}
 
+/* ── DISCLAIMER BOX ─────────────────────────────── */
+.disclaimer{
+  background:#fffbea;border:1px solid #f5e27a;border-left:4px solid #c8973a;
+  border-radius:8px;padding:12px 16px;font-size:12px;color:#5a3e00;
+  margin-bottom:16px;line-height:1.8;
+}
+.disclaimer strong{font-weight:600;color:#3d2900}
+.disclaimer .d-row{display:flex;gap:7px;align-items:flex-start;margin-top:3px;font-size:12px}
+.disclaimer .d-icon{flex-shrink:0}
+
 /* ── PASSWORD LOCK ───────────────────────────────── */
 .pw-overlay{
   position:fixed;inset:0;background:#0f1f3d;
@@ -392,6 +402,14 @@ if(sessionStorage.getItem('eland_auth')==='1'){
 
     <!-- 전주 대비 변경사항 -->
     <div id="w-cmp-wrap"></div>
+
+    <!-- ⚠️ 활용 안내 박스 -->
+    <div class="disclaimer">
+      <strong>📌 대시보드 활용 시 반드시 확인해 주세요</strong>
+      <div class="d-row"><span class="d-icon">①</span><span>본 대시보드는 수집 시점 기준의 데이터입니다. 조회 시점에 따라 공고가 이미 수정·삭제되었거나, 링크가 연결되지 않을 수 있습니다.</span></div>
+      <div class="d-row"><span class="d-icon">②</span><span>리스크 분류(고위험·중위험)는 <strong>법 위반의 확정이 아닌 검토가 필요한 항목</strong>입니다. 반드시 해당 플랫폼에 직접 접속하여 현재 게시 내용을 확인하신 후 조치 여부를 판단해 주시기 바랍니다.</span></div>
+      <div class="d-row"><span class="d-icon">③</span><span>공고를 이미 내리셨거나 수정하신 경우, RO실(shinhw@eland.co.kr)로 알려주시면 조치 완료로 업데이트하겠습니다.</span></div>
+    </div>
 
     <!-- 브랜드별 요약 -->
     <div class="sec">
@@ -575,7 +593,7 @@ const WEEKS = [
       { name:"공통(5개브랜드)",total:1, high:1, mid:0, ok:0,  act:1, conf:true,  risk:"【즉시시정】잡코리아 마감 공고(2026.01.28) 약 3개월 방치" },
     ],
     detail: [
-      { store:"애슐리퀸즈 루원시티 인천점",    url:"https://www.albamon.com/jobs/detail/116217506", brand:"애슐리퀸즈",     plt:"알바몬",             sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 이메일 지원 포함", risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 여부 확인 필요(채용절차법 제11조)", law:["채용절차법"], lv:"mid", st:"검토중" },
+      { store:"애슐리퀸즈 루원시티 인천점",    url:"https://www.albamon.com/jobs/detail/116217506", brand:"애슐리퀸즈",     plt:"알바몬",             sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 이메일 지원 포함", risk:"이메일 지원 포함 — 온라인 제출 서류는 채용절차법상 반환 의무 없음(제11조 단서). 채용 확정 전 반환 안내 고지 여부만 확인 권고(※중위험 해제)", law:[], lv:"ok", st:"완료" },
       { store:"애슐리퀸즈 스타필드빌리지 운정점",url:"https://www.albamon.com/jobs/detail/116245546",brand:"애슐리퀸즈",    plt:"알바몬",             sum:"홀/주방 신규오픈, 시급 10,320원, 간편문자 지원",               risk:"이상없음", law:[], lv:"ok", st:"완료" },
       { store:"애슐리퀸즈 NC 해운대점",         url:"https://www.albamon.com/jobs/detail/116244956",brand:"애슐리퀸즈",     plt:"알바몬",             sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원) 별도 명시",     risk:"이상없음 — 기본·주휴포함 구분 명시 적정", law:[], lv:"ok", st:"완료" },
       { store:"애슐리퀸즈 스타필드시티 부천점",  url:"https://www.albamon.com/jobs/detail/116244210",brand:"애슐리퀸즈",    plt:"알바몬",             sum:"홀/주방, 시급 10,320원, 온라인+문자 지원",                    risk:"이상없음", law:[], lv:"ok", st:"완료" },
@@ -585,15 +603,15 @@ const WEEKS = [
       { store:"애슐리퀸즈 마곡점",              url:"https://www.albamon.com/jobs/detail/116241807", brand:"애슐리퀸즈",     plt:"알바몬",             sum:"주방, 주휴포함 12,720원, 마감 2026-04-30",                    risk:"이상없음", law:[], lv:"ok", st:"완료" },
       { store:"애슐리퀸즈 롯데몰 은평점",       url:"https://www.albamon.com/jobs/detail/116242168", brand:"애슐리퀸즈",     plt:"알바몬",             sum:"홀, 주휴포함 시급 12,384원, 상시모집",                        risk:"이상없음", law:[], lv:"ok", st:"완료" },
       { store:"이랜드이츠 채용몰 — 애슐리퀸즈 매장관리자",url:"https://elandeats.career.greetinghr.com/ko/o/201343",brand:"애슐리퀸즈",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시채용",risk:"이상없음",law:[],lv:"ok",st:"완료"},
-      { store:"델리BY애슐리 평촌킴스점",        url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",            sum:"주방 조리(핫파트), 주휴포함 시급 단독 표기",                   risk:"기본시급 미표기, 주휴포함 시급만 기재 — 기본시급 명시 필요(최저임금법 제6조)", law:["최저임금법"], lv:"mid", st:"검토중" },
-      { store:"델리BY애슐리 야탑킴스점",        url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",            sum:"주방, 주휴포함 12,360원 표기",                                 risk:"이상없음", law:[], lv:"ok", st:"완료" },
-      { store:"델리BY애슐리 구로킴스점",        url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",            sum:"주방, 주휴포함 12,360원, 상시모집",                            risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"델리BY애슐리 평촌킴스점",        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",brand:"델리By애슐리",plt:"알바몬",            sum:"주방 조리(핫파트), 주휴포함 시급 단독 표기",                   risk:"기본시급 미표기, 주휴포함 시급만 기재 — 기본시급 명시 필요(최저임금법 제6조)", law:["최저임금법"], lv:"mid", st:"검토중" },
+      { store:"델리BY애슐리 야탑킴스점",        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",brand:"델리By애슐리",plt:"알바몬",            sum:"주방, 주휴포함 12,360원 표기",                                 risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"델리BY애슐리 구로킴스점",        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",brand:"델리By애슐리",plt:"알바몬",            sum:"주방, 주휴포함 12,360원, 상시모집",                            risk:"이상없음", law:[], lv:"ok", st:"완료" },
       { store:"로운 샤브샤브 NC광주역점",       url:"https://www.daangn.com",                          brand:"로운",          plt:"당근알바",           sum:"홀 서빙, 주 4일 협의, 1개월 이상",                            risk:"이상없음", law:[], lv:"ok", st:"완료" },
       { store:"로운 샤브샤브 동탄이마트점",     url:"https://elandeats.career.greetinghr.com/ko/o/200949",brand:"로운",       plt:"이랜드이츠 채용몰", sum:"스토어매니저, 정규직, 상시채용",                               risk:"이상없음", law:[], lv:"ok", st:"완료" },
-      { store:"피자몰 NC강서점",                url:"https://www.albamon.com/jobs/detail/116238046",   brand:"피자몰",        plt:"알바몬",             sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10", risk:"이상없음", law:[], lv:"ok", st:"완료" },
-      { store:"피자몰 뉴코아평촌점",            url:"https://www.albamon.com/jobs/detail/116210355",   brand:"피자몰",        plt:"알바몬",             sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월",                  risk:"초단시간 공고이나 주휴수당 적용 기준 미명시(근로기준법 제18조)", law:["근로기준법"], lv:"mid", st:"검토중" },
-      { store:"피자몰 대구이월드점",            url:"https://www.albamon.com/jobs/detail/116205398",   brand:"피자몰",        plt:"알바몬",             sum:"초단시간, 시급 10,320원, 1~3개월",                            risk:"초단시간+단기계약 — 근로계약서 체결 의무 및 주휴수당 기준 안내 미확인(근로기준법 제17조·제18조)", law:["근로기준법"], lv:"mid", st:"검토중" },
-      { store:"피자몰 NC신구로점",              url:"https://www.albamon.com/jobs/detail/116166782",   brand:"피자몰",        plt:"알바몬",             sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",         risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 필요(채용절차법 제11조)", law:["채용절차법"], lv:"mid", st:"검토중" },
+      { store:"피자몰 NC강서점",                url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",   brand:"피자몰",        plt:"알바몬",             sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10", risk:"이상없음", law:[], lv:"ok", st:"완료" },
+      { store:"피자몰 뉴코아평촌점",            url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%ED%8F%89%EC%B4%8C",   brand:"피자몰",        plt:"알바몬",             sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월",                  risk:"초단시간 공고이나 주휴수당 적용 기준 미명시(근로기준법 제18조)", law:["근로기준법"], lv:"mid", st:"검토중" },
+      { store:"피자몰 대구이월드점",            url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",   brand:"피자몰",        plt:"알바몬",             sum:"초단시간, 시급 10,320원, 1~3개월",                            risk:"초단시간+단기계약 — 근로계약서 체결 의무 및 주휴수당 기준 안내 미확인(근로기준법 제17조·제18조)", law:["근로기준법"], lv:"mid", st:"검토중" },
+      { store:"피자몰 NC신구로점",              url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EC%8B%A0%EA%B5%AC%EB%A1%9C",   brand:"피자몰",        plt:"알바몬",             sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",         risk:"이메일 지원 포함 — 온라인 제출 서류는 채용절차법상 반환 의무 없음(제11조 단서). 채용 확정 전 고지 여부만 확인 권고(※중위험 해제)", law:[], lv:"ok", st:"완료" },
       { store:"리미니 스타필드 위례점",         url:"https://www.albamon.com/total-search?keyword=%EB%A6%AC%EB%AF%B8%EB%8B%88",brand:"리미니",plt:"당근알바",sum:"기본시급 9,620원(주휴포함 10,030원) 표기", risk:"【즉시시정】기본시급 9,620원 · 주휴포함 10,030원 — 모두 최저임금(10,320원) 미달. 최저임금법 제6조 위반. 당근알바 공고 즉시 삭제 필요.", law:["최저임금법"], lv:"high", st:"미조치" },
       { store:"이랜드이츠 채용몰 — 리미니 매장관리자",url:"https://elandeats.career.greetinghr.com/ko/o/202247",brand:"리미니",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"이랜드이츠 1분기 신입 채용\n(애슐리퀸즈·피자몰·로운·자연별곡·리미니)",url:"https://www.jobkorea.co.kr/Recruit/Co_Read/C/elandeats",brand:"공통(5개브랜드)",plt:"잡코리아",sum:"신입 매장관리자, 연봉 내규, 마감 2026-01-28",risk:"【즉시시정】마감일 2026.01.28 경과 후 약 3개월째 잡코리아 노출. 채용절차법 제4조 위반 소지. ※링크 클릭 시 이랜드이츠 잡코리아 기업페이지(마감공고 포함) 이동.",law:["채용절차법"],lv:"high",st:"미조치"},
@@ -624,7 +642,7 @@ const WEEKS = [
     detail: [
       { store:"애슐리퀸즈 롯데몰 은평점",          url:"https://www.albamon.com/jobs/detail/116242168",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀, 주휴포함 12,384원, 상시모집",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"애슐리퀸즈 마곡점",                  url:"https://www.albamon.com/jobs/detail/116241807",brand:"애슐리퀸즈",plt:"알바몬",sum:"주방, 주휴포함 12,720원, 마감 04-30",risk:"이상없음",law:[],lv:"ok",st:"완료"},
-      { store:"애슐리퀸즈 루원시티 인천점",          url:"https://www.albamon.com/jobs/detail/116217506",brand:"애슐리퀸즈",plt:"알바몬",sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 이메일 지원 포함, 4/27 등록",risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 여부 확인 필요(채용절차법 제11조)",law:["채용절차법"],lv:"mid",st:"검토중"},
+      { store:"애슐리퀸즈 루원시티 인천점",          url:"https://www.albamon.com/jobs/detail/116217506",brand:"애슐리퀸즈",plt:"알바몬",sum:"주방, 기본시급 10,500원(주휴포함 12,600원), 이메일 지원 포함, 4/27 등록",risk:"이메일 지원 포함 — 온라인 제출 서류는 채용절차법상 반환 의무 없음(제11조 단서). 채용 확정 전 반환 안내 고지 여부만 확인 권고(※중위험 해제)",law:[],lv:"ok",st:"완료"},
       { store:"애슐리퀸즈 스타필드빌리지 운정점",    url:"https://www.albamon.com/jobs/detail/116245546",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀/주방 신규오픈, 시급 10,320원",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"애슐리퀸즈 NC 해운대점",              url:"https://www.albamon.com/jobs/detail/116244956",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원) 별도 명시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"애슐리퀸즈 스타필드시티 부천점",      url:"https://www.albamon.com/jobs/detail/116244210",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀/주방, 시급 10,320원",risk:"이상없음",law:[],lv:"ok",st:"완료"},
@@ -632,16 +650,16 @@ const WEEKS = [
       { store:"애슐리퀸즈 화정점(벨라시타 일산)",    url:"https://www.albamon.com/jobs/detail/116240356",brand:"애슐리퀸즈",plt:"알바몬",sum:"홀, 기본시급 10,320원, 마감 2026-05-10",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"애슐리퀸즈 스타필드 운정점(주방)",    url:"https://www.albamon.com/jobs/detail/116237525",brand:"애슐리퀸즈",plt:"알바몬",sum:"주방, 기본시급 10,500원(주휴포함 12,600원)",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"이랜드이츠 채용몰 — 애슐리퀸즈 관리자",url:"https://elandeats.career.greetinghr.com/ko/o/201343",brand:"애슐리퀸즈",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
-      { store:"델리BY애슐리 평촌킴스점",             url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 시급 단독 표기",risk:"기본시급 미표기 — 기본시급 명시 필요(최저임금법 제6조 위반 예방)",law:["최저임금법"],lv:"mid",st:"검토중"},
-      { store:"델리BY애슐리 야탑킴스점",             url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 12,360원",risk:"이상없음",law:[],lv:"ok",st:"완료"},
-      { store:"델리BY애슐리 구로킴스점",             url:"https://www.albamon.com/jobs/brand/normal/1030008",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 12,360원, 상시모집",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"델리BY애슐리 평촌킴스점",             url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 시급 단독 표기",risk:"기본시급 미표기 — 기본시급 명시 필요(최저임금법 제6조 위반 예방)",law:["최저임금법"],lv:"mid",st:"검토중"},
+      { store:"델리BY애슐리 야탑킴스점",             url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 12,360원",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"델리BY애슐리 구로킴스점",             url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",brand:"델리By애슐리",plt:"알바몬",sum:"주방, 주휴포함 12,360원, 상시모집",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"로운 샤브샤브 동탄이마트점(관리자)",  url:"https://elandeats.career.greetinghr.com/ko/o/200949",brand:"로운",plt:"이랜드이츠 채용몰",sum:"스토어매니저, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
-      { store:"피자몰 NC강서점 (4/27 신규)",         url:"https://www.albamon.com/jobs/detail/116238046",brand:"피자몰",plt:"알바몬",sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10",risk:"이상없음",law:[],lv:"ok",st:"완료"},
-      { store:"피자몰 NC강서점 (4/26 기존·지속노출)",url:"https://www.albamon.com/jobs/detail/116217886",brand:"피자몰",plt:"알바몬",sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10",risk:"동일 매장 공고 2건 동시 노출 — 중복 게시 여부 확인 권고",law:[],lv:"ok",st:"완료"},
-      { store:"피자몰 뉴코아평촌점",                 url:"https://www.albamon.com/jobs/detail/116210355",brand:"피자몰",plt:"알바몬",sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월",risk:"초단시간 공고이나 소정근로시간·주휴수당 적용 기준 미명시(근로기준법 제18조)",law:["근로기준법"],lv:"mid",st:"검토중"},
-      { store:"피자몰 대구이월드점 (4/26)",          url:"https://www.albamon.com/jobs/detail/116205398",brand:"피자몰",plt:"알바몬",sum:"초단시간, 시급 10,320원, 1~3개월",risk:"초단시간+단기계약 — 근로계약서 체결 및 주휴수당 안내 미확인(근로기준법 제17조·제18조)",law:["근로기준법"],lv:"mid",st:"검토중"},
-      { store:"피자몰 대구이월드점 (4/23 기존·지속)", url:"https://www.albamon.com/jobs/detail/116167761",brand:"피자몰",plt:"알바몬",sum:"초단시간, 시급 10,320원, 4/23 등록 후 지속 노출",risk:"전주 동일 공고 지속 — 초단시간 주휴수당 미고지(근로기준법 제18조), 중복 공고 정리 권고",law:["근로기준법"],lv:"mid",st:"검토중"},
-      { store:"피자몰 NC신구로점",                   url:"https://www.albamon.com/jobs/detail/116166782",brand:"피자몰",plt:"알바몬",sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 필요(채용절차법 제11조)",law:["채용절차법"],lv:"mid",st:"검토중"},
+      { store:"피자몰 NC강서점 (4/27 신규)",         url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",brand:"피자몰",plt:"알바몬",sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10",risk:"이상없음",law:[],lv:"ok",st:"완료"},
+      { store:"피자몰 NC강서점 (4/26 기존·지속노출)",url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",brand:"피자몰",plt:"알바몬",sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감 05-10",risk:"동일 매장 공고 2건 동시 노출 — 중복 게시 여부 확인 권고",law:[],lv:"ok",st:"완료"},
+      { store:"피자몰 뉴코아평촌점",                 url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%ED%8F%89%EC%B4%8C",brand:"피자몰",plt:"알바몬",sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월",risk:"초단시간 공고이나 소정근로시간·주휴수당 적용 기준 미명시(근로기준법 제18조)",law:["근로기준법"],lv:"mid",st:"검토중"},
+      { store:"피자몰 대구이월드점 (4/26)",          url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",brand:"피자몰",plt:"알바몬",sum:"초단시간, 시급 10,320원, 1~3개월",risk:"초단시간+단기계약 — 근로계약서 체결 및 주휴수당 안내 미확인(근로기준법 제17조·제18조)",law:["근로기준법"],lv:"mid",st:"검토중"},
+      { store:"피자몰 대구이월드점 (4/23 기존·지속)", url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",brand:"피자몰",plt:"알바몬",sum:"초단시간, 시급 10,320원, 4/23 등록 후 지속 노출",risk:"동일 매장 공고 중복 지속 — 법적 위반 아님. 공고 통합 또는 정리 권고. 초단시간 주휴수당 기준 미명시 병존(근로기준법 제18조)",law:["근로기준법"],lv:"mid",st:"검토중"},
+      { store:"피자몰 NC신구로점",                   url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EC%8B%A0%EA%B5%AC%EB%A1%9C",brand:"피자몰",plt:"알바몬",sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",risk:"이메일 지원 포함 — 온라인 제출 서류는 채용절차법상 반환 의무 없음(제11조 단서). 채용 확정 전 고지 여부만 확인 권고(※중위험 해제)",law:[],lv:"ok",st:"완료"},
       { store:"리미니 2001 분당점",                  url:"https://www.daangn.com/kr/jobs/%EB%A6%AC%EB%AF%B8%EB%8B%88%EB%B6%84%EB%8B%B9%EC%A0%90%EC%95%84%EB%A5%B4%EB%B0%94%EC%9D%B4%ED%8A%B8%EB%AA%A8%EC%A7%91-%EC%A3%BC%ED%9C%B4%ED%8F%AC%ED%95%A8%EC%8B%9C%EA%B8%8912-384%EC%9B%90-kwwy5dzkyemv/",brand:"리미니",plt:"당근알바",sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원), 1분단위 수당 명시",risk:"이상없음 — 기본·주휴포함 구분 명시. 지난주 위례점 위반 공고 해소 확인",law:[],lv:"ok",st:"완료"},
       { store:"이랜드이츠 채용몰 — 리미니 매장관리자",url:"https://elandeats.career.greetinghr.com/ko/o/202247",brand:"리미니",plt:"이랜드이츠 채용몰",sum:"신입/경력, 정규직, 상시",risk:"이상없음",law:[],lv:"ok",st:"완료"},
       { store:"이랜드이츠 1분기 신입 채용\n(애슐리퀸즈·피자몰·로운·자연별곡·리미니)",url:"https://www.jobkorea.co.kr/Recruit/Co_Read/C/elandeats",brand:"공통(5개브랜드)",plt:"잡코리아",sum:"신입 매장관리자, 마감 2026-01-28",risk:"【즉시시정】마감 후 약 4개월째 잡코리아 노출 지속. 전주 조치 미이행 재확인. 채용절차법 제4조 위반 소지. ※링크 클릭 시 이랜드이츠 잡코리아 기업페이지(마감공고 포함) 이동.",law:["채용절차법"],lv:"high",st:"미조치"},
@@ -750,21 +768,21 @@ const WEEKS = [
 
       // ── 델리By애슐리 ──────────────────────────────────────────
       { store:"델리BY애슐리 평촌킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방 조리(핫파트), 주휴포함 시급 단독 표기, 3주 연속 동일",
         risk:"3주 연속 기본시급 미표기 — 기본시급 명시 여부 확인 필요(최저임금법 제6조). 반복 미조치 사항으로 담당 매장 직접 확인 권고",
         law:["최저임금법"], lv:"mid", st:"미조치" },
 
       { store:"델리BY애슐리 야탑킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원",
         risk:"이상없음",
         law:[], lv:"ok", st:"완료" },
 
       { store:"델리BY애슐리 구로킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원, 상시모집",
         risk:"이상없음",
@@ -780,45 +798,45 @@ const WEEKS = [
 
       // ── 피자몰 ────────────────────────────────────────────────
       { store:"피자몰 NC강서점 (4/27 등록·지속)",
-        url:"https://www.albamon.com/jobs/detail/116238046",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 2026-05-10",
         risk:"이상없음 — 마감일 도래(5/10). 마감 후 자동 삭제 여부 확인 필요",
         law:[], lv:"ok", st:"완료" },
 
       { store:"피자몰 NC강서점 (4/26 기존·중복)",
-        url:"https://www.albamon.com/jobs/detail/116217886",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 2026-05-10",
         risk:"동일 매장 공고 2건 동시 노출 3주 지속 — 중복 공고 즉시 정리 필요",
         law:[], lv:"ok", st:"검토중" },
 
       { store:"피자몰 뉴코아평촌점",
-        url:"https://www.albamon.com/jobs/detail/116210355",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%ED%8F%89%EC%B4%8C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방 주말 초단시간, 시급 10,320원, 3~6개월, 상시모집",
         risk:"초단시간 공고 주휴수당 적용 기준 미명시 3주 연속 미조치(근로기준법 제18조) — 담당 매장 직접 시정 권고",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 대구이월드점 (4/26·지속)",
-        url:"https://www.albamon.com/jobs/detail/116205398",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 1~3개월",
         risk:"초단시간+단기계약 주휴수당 미고지 2주 연속(근로기준법 제17조·제18조)",
         law:["근로기준법"], lv:"mid", st:"검토중" },
 
       { store:"피자몰 대구이월드점 (4/23·지속)",
-        url:"https://www.albamon.com/jobs/detail/116167761",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 4/23 등록 후 3주 지속 노출",
         risk:"동일 매장 공고 중복 3주 지속 — 공고 통합 또는 삭제 권고(근로기준법 제18조 주휴수당 미고지)",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 NC신구로점",
-        url:"https://www.albamon.com/jobs/detail/116166782",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EC%8B%A0%EA%B5%AC%EB%A1%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",
-        risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 3주 연속 미확인(채용절차법 제11조)",
+        risk:"이메일 지원 포함 — 온라인 제출 서류는 반환 의무 없음(채용절차법 제11조 단서). 채용 확정 전 고지 여부 확인 권고(※중위험 해제)",
         law:["채용절차법"], lv:"mid", st:"미조치" },
 
       // ── 리미니 ────────────────────────────────────────────────
@@ -976,21 +994,21 @@ const WEEKS = [
 
       // ── 델리By애슐리 ──────────────────────────────────────────
       { store:"델리BY애슐리 평촌킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 시급 단독 표기, 4주 연속 동일",
         risk:"4주 연속 기본시급 미표기 미조치 — 담당 매장 직접 시정 요청 필요(최저임금법 제6조)",
         law:["최저임금법"], lv:"mid", st:"미조치" },
 
       { store:"델리BY애슐리 야탑킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원",
         risk:"이상없음",
         law:[], lv:"ok", st:"완료" },
 
       { store:"델리BY애슐리 구로킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원, 상시모집",
         risk:"이상없음",
@@ -1006,38 +1024,38 @@ const WEEKS = [
 
       // ── 피자몰 ────────────────────────────────────────────────
       { store:"피자몰 NC강서점",
-        url:"https://www.albamon.com/jobs/detail/116238046",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방 마감조, 기본시급 10,320원(주휴포함 12,384원), 마감 2026-05-10 경과",
         risk:"마감일(5/10) 경과 후에도 공고 계속 노출 — 마감 공고 방치. 채용절차법 제4조 위반 소지. 즉시 삭제 요청 필요",
         law:["채용절차법"], lv:"high", st:"미조치" },
 
       { store:"피자몰 뉴코아평촌점",
-        url:"https://www.albamon.com/jobs/detail/116210355",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%ED%8F%89%EC%B4%8C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방 주말 초단시간, 시급 10,320원, 상시모집",
         risk:"초단시간 주휴수당 적용 기준 미명시 4주 연속 미조치(근로기준법 제18조)",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 대구이월드점 (4/26·지속)",
-        url:"https://www.albamon.com/jobs/detail/116205398",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 1~3개월",
         risk:"초단시간+단기계약 주휴수당 미고지 3주 연속(근로기준법 제17조·제18조)",
         law:["근로기준법"], lv:"mid", st:"검토중" },
 
       { store:"피자몰 대구이월드점 (4/23·지속)",
-        url:"https://www.albamon.com/jobs/detail/116167761",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 4/23 등록 후 4주 지속 노출",
         risk:"동일 매장 중복 공고 4주 지속 — 즉시 통합 또는 삭제 필요(근로기준법 제18조)",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 NC신구로점",
-        url:"https://www.albamon.com/jobs/detail/116166782",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EC%8B%A0%EA%B5%AC%EB%A1%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",
-        risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 4주 연속 미확인(채용절차법 제11조)",
+        risk:"이메일 지원 포함 — 온라인 제출 서류는 반환 의무 없음(채용절차법 제11조 단서). 채용 확정 전 고지 여부 확인 권고(※중위험 해제)",
         law:["채용절차법"], lv:"mid", st:"미조치" },
 
       // ── 리미니 ────────────────────────────────────────────────
@@ -1085,7 +1103,7 @@ const WEEKS = [
         url:"https://m.albamon.com/jobs/detail/116602938",
         brand:"애슐리퀸즈", plt:"알바몬",
         sum:"홀/주방, 기본시급 10,320원(주휴포함 12,384원), 3~6개월",
-        risk:"동일 매장 공고 2건 동시 노출 — 중복 게시 정리 필요",
+        risk:"동일 매장 공고 2건 동시 노출 — 법적 위반은 아니나 혼선 방지를 위해 정리 권고",
         law:[], lv:"ok", st:"검토중" },
 
       { store:"애슐리퀸즈 뉴코아 동수원점 (공고 2·중복)",
@@ -1162,7 +1180,7 @@ const WEEKS = [
         url:"https://m.albamon.com/jobs/detail/116618943",
         brand:"애슐리퀸즈", plt:"알바몬",
         sum:"홀, 기본시급 10,320원(주휴포함 12,384원), 유사 내용",
-        risk:"동일 매장 유사 공고 2건 — 중복 여부 확인 권고",
+        risk:"동일 매장 유사 공고 2건 — 법적 위반은 아니나 정리 권고",
         law:[], lv:"ok", st:"검토중" },
 
       { store:"애슐리퀸즈 구의 이스트폴점",
@@ -1188,21 +1206,21 @@ const WEEKS = [
 
       // ── 델리By애슐리 ──────────────────────────────────────────
       { store:"델리BY애슐리 평촌킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 시급 단독 표기, 5주 연속 동일",
         risk:"5주 연속 기본시급 미표기 — 반복 미조치. 담당 매장 즉시 직접 시정 요청 필요(최저임금법 제6조)",
         law:["최저임금법"], lv:"mid", st:"미조치" },
 
       { store:"델리BY애슐리 야탑킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원",
         risk:"이상없음",
         law:[], lv:"ok", st:"완료" },
 
       { store:"델리BY애슐리 구로킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원, 상시모집",
         risk:"이상없음",
@@ -1218,45 +1236,45 @@ const WEEKS = [
 
       // ── 피자몰 ────────────────────────────────────────────────
       { store:"피자몰 NC강서점 (4/27·마감 5/10 경과·2주 방치)",
-        url:"https://www.albamon.com/jobs/detail/116238046",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감일 2026-05-10 경과",
         risk:"【즉시시정】마감일 5/10 경과 후 2주 연속 공고 방치 — 채용절차법 제4조 위반. 알바몬 담당자에게 즉시 삭제 요청 필요",
         law:["채용절차법"], lv:"high", st:"미조치" },
 
       { store:"피자몰 NC강서점 (4/26·마감 5/10 경과·중복)",
-        url:"https://www.albamon.com/jobs/detail/116217886",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감일 2026-05-10 경과",
         risk:"마감 공고 방치 + 중복 게시 2주 연속 — 동일 매장 2건 모두 즉시 삭제 필요",
         law:["채용절차법"], lv:"high", st:"미조치" },
 
       { store:"피자몰 뉴코아평촌점",
-        url:"https://www.albamon.com/jobs/detail/116210355",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%ED%8F%89%EC%B4%8C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방 주말 초단시간, 시급 10,320원, 상시모집",
         risk:"초단시간 주휴수당 적용 기준 미명시 5주 연속 미조치(근로기준법 제18조)",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 대구이월드점 (4/26·지속)",
-        url:"https://www.albamon.com/jobs/detail/116205398",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 1~3개월",
         risk:"초단시간+단기계약 주휴수당 미고지 4주 연속(근로기준법 제17조·제18조)",
         law:["근로기준법"], lv:"mid", st:"검토중" },
 
       { store:"피자몰 대구이월드점 (4/23·지속)",
-        url:"https://www.albamon.com/jobs/detail/116167761",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 4/23 등록 후 5주 지속",
-        risk:"중복 공고 5주 지속 — 즉시 통합·삭제 필요(근로기준법 제18조)",
+        risk:"동일 매장 공고 중복 지속 — 법적 위반 아님. 공고 통합 또는 정리 권고",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 NC신구로점",
-        url:"https://www.albamon.com/jobs/detail/116166782",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EC%8B%A0%EA%B5%AC%EB%A1%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",
-        risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 5주 연속 미확인(채용절차법 제11조)",
+        risk:"이메일 지원 포함 — 온라인 제출 서류는 반환 의무 없음(채용절차법 제11조 단서). 채용 확정 전 고지 여부 확인 권고(※중위험 해제)",
         law:["채용절차법"], lv:"mid", st:"미조치" },
 
       // ── 리미니 ────────────────────────────────────────────────
@@ -1314,19 +1332,19 @@ const WEEKS = [
     ],
     detail: [
       { store:"피자몰 NC강서점 (마감공고 방치 지속)",
-        url:"https://www.albamon.com/jobs/detail/116238046",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"마감일 2026-05-10 경과 — 공백기간 중 방치 지속 추정",
         risk:"【즉시시정】마감 공고 방치 3주 이상 지속 추정. 채용절차법 제4조 위반 소지",
         law:["채용절차법"], lv:"high", st:"미조치" },
       { store:"델리BY애슐리 평촌킴스점 (반복 미조치)",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 시급 단독 표기, 6주 이상 지속",
         risk:"6주 이상 기본시급 미표기 반복 미조치(최저임금법 제6조)",
         law:["최저임금법"], lv:"mid", st:"미조치" },
       { store:"피자몰 뉴코아평촌점 (초단시간 미고지 지속)",
-        url:"https://www.albamon.com/jobs/detail/116210355",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%ED%8F%89%EC%B4%8C",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 상시모집",
         risk:"초단시간 주휴수당 미고지 6주 이상 지속(근로기준법 제18조)",
@@ -1357,13 +1375,13 @@ const WEEKS = [
     ],
     detail: [
       { store:"피자몰 NC강서점 (마감공고 방치 지속)",
-        url:"https://www.albamon.com/jobs/detail/116238046",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"마감일 2026-05-10 경과 — 방치 지속",
         risk:"【즉시시정】마감 공고 방치 4~5주 이상 지속. 채용절차법 제4조 위반 소지",
         law:["채용절차법"], lv:"high", st:"미조치" },
       { store:"델리BY애슐리 평촌킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 시급 단독 표기",
         risk:"7주 이상 기본시급 미표기(최저임금법 제6조) — 즉시 담당 매장 직접 시정 필요",
@@ -1394,13 +1412,13 @@ const WEEKS = [
     ],
     detail: [
       { store:"피자몰 NC강서점 (마감공고 방치 지속)",
-        url:"https://www.albamon.com/jobs/detail/116238046",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"마감일 2026-05-10 경과 — 방치 지속",
         risk:"【즉시시정】마감 공고 방치 약 5~6주 지속. 채용절차법 제4조 위반 소지",
         law:["채용절차법"], lv:"high", st:"미조치" },
       { store:"델리BY애슐리 평촌킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 시급 단독 표기",
         risk:"8주 이상 반복 미조치 — 담당 매장 직접 시정 요청 시급(최저임금법 제6조)",
@@ -1510,21 +1528,21 @@ const WEEKS = [
 
       // ── 델리By애슐리 ──────────────────────────────────────────
       { store:"델리BY애슐리 평촌킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 시급 단독 표기, 10주 이상 동일",
         risk:"【장기 미조치】10주 이상 기본시급 미표기 반복 — 담당 매장 직접 시정 요청 및 결과 보고 필요(최저임금법 제6조)",
         law:["최저임금법"], lv:"mid", st:"미조치" },
 
       { store:"델리BY애슐리 야탑킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원",
         risk:"이상없음",
         law:[], lv:"ok", st:"완료" },
 
       { store:"델리BY애슐리 구로킴스점",
-        url:"https://www.albamon.com/jobs/brand/normal/1030008",
+        url:"https://www.albamon.com/total-search?keyword=%EB%8D%B8%EB%A6%AC%EB%B0%94%EC%9D%B4%EC%95%A0%EC%8A%90%EB%A6%AC",
         brand:"델리By애슐리", plt:"알바몬",
         sum:"주방, 주휴포함 12,360원, 상시모집",
         risk:"이상없음",
@@ -1547,45 +1565,45 @@ const WEEKS = [
 
       // ── 피자몰 ────────────────────────────────────────────────
       { store:"피자몰 NC강서점 (4/27·마감 5/10·약 7주 방치)",
-        url:"https://www.albamon.com/jobs/detail/116238046",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감일 2026-05-10 경과",
         risk:"【즉시시정】마감일 5/10 경과 후 약 7주 연속 공고 방치 — 채용절차법 제4조 위반. 알바몬 담당자 재차 삭제 요청 및 미이행 시 고용노동부 신고 검토 필요",
         law:["채용절차법"], lv:"high", st:"미조치" },
 
       { store:"피자몰 NC강서점 (4/26·마감 5/10·중복 7주 방치)",
-        url:"https://www.albamon.com/jobs/detail/116217886",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EA%B0%95%EC%84%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방, 기본시급 10,320원(주휴포함 12,384원), 마감일 2026-05-10 경과",
         risk:"【즉시시정】동일 매장 마감 공고 2건 7주 연속 방치 — 알바몬 플랫폼 측에 강력 시정 요청 필요",
         law:["채용절차법"], lv:"high", st:"미조치" },
 
       { store:"피자몰 뉴코아평촌점",
-        url:"https://www.albamon.com/jobs/detail/116210355",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%ED%8F%89%EC%B4%8C",
         brand:"피자몰", plt:"알바몬",
         sum:"주방 주말 초단시간, 시급 10,320원, 상시모집",
         risk:"초단시간 주휴수당 적용 기준 미명시 장기 지속(근로기준법 제18조)",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 대구이월드점 (4/26·지속)",
-        url:"https://www.albamon.com/jobs/detail/116205398",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 1~3개월",
         risk:"초단시간+단기계약 주휴수당 미고지 장기 지속(근로기준법 제17조·제18조)",
         law:["근로기준법"], lv:"mid", st:"검토중" },
 
       { store:"피자몰 대구이월드점 (4/23·지속)",
-        url:"https://www.albamon.com/jobs/detail/116167761",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EB%8C%80%EA%B5%AC",
         brand:"피자몰", plt:"알바몬",
         sum:"초단시간, 시급 10,320원, 4/23 등록 후 10주 이상 지속",
-        risk:"중복 공고 10주 이상 장기 노출 — 즉시 통합·삭제 필요(근로기준법 제18조)",
+        risk:"동일 매장 공고 중복 장기 노출 — 법적 위반 아님. 공고 통합 또는 정리 권고",
         law:["근로기준법"], lv:"mid", st:"미조치" },
 
       { store:"피자몰 NC신구로점",
-        url:"https://www.albamon.com/jobs/detail/116166782",
+        url:"https://www.albamon.com/total-search?keyword=%ED%94%BC%EC%9E%90%EB%AA%B0+%EC%8B%A0%EA%B5%AC%EB%A1%9C",
         brand:"피자몰", plt:"알바몬",
         sum:"주말(토/일) 12:00~19:30, 시급 10,320원, 이메일 지원",
-        risk:"이메일 지원 포함 — 채용서류 반환 의무 안내 장기 미확인(채용절차법 제11조)",
+        risk:"이메일 지원 포함 — 온라인 제출 서류는 반환 의무 없음(채용절차법 제11조 단서). 채용 확정 전 고지 여부 확인 권고(※중위험 해제)",
         law:["채용절차법"], lv:"mid", st:"미조치" },
 
       // ── 리미니 ────────────────────────────────────────────────
