@@ -246,19 +246,100 @@ table.cmp-tbl tbody tr:hover td{background:#fafaf8}
 .bc-arrow{font-size:14px;flex-shrink:0;width:18px;text-align:center}
 .bc-desc{color:var(--sub);flex:1;line-height:1.55}
 
-/* ── FOOTER ─────────────────────────────────────── */
-footer{background:var(--navy);padding:16px 28px;color:rgba(255,255,255,.45);font-size:11px;line-height:1.8}
-.ft-in{max-width:1360px;margin:0 auto}
-footer strong{color:rgba(255,255,255,.75)}
-
-@media print{.hdr{position:static}.fbar,.act-grid,.mo-ov,.view-tabs,.week-bar,.legend{display:none!important}body{background:#fff}}
-@media(max-width:960px){.kpi{grid-template-columns:repeat(3,1fr)}.act-grid{grid-template-columns:1fr 1fr}.cum-grid{grid-template-columns:1fr}.main{padding:16px 14px 40px}.hdr-in{padding:12px 14px}}
-@media(max-width:600px){.kpi{grid-template-columns:1fr 1fr}.act-grid{grid-template-columns:1fr}}
+/* ── PASSWORD LOCK ───────────────────────────────── */
+.pw-overlay{
+  position:fixed;inset:0;background:#0f1f3d;
+  z-index:9999;display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:0;
+}
+.pw-box{
+  background:#fff;border-radius:16px;
+  padding:40px 44px;width:360px;
+  box-shadow:0 24px 60px rgba(0,0,0,.4);
+  text-align:center;
+}
+.pw-logo{
+  width:48px;height:48px;background:#e8401c;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:24px;margin:0 auto 16px;
+}
+.pw-title{font-size:15px;font-weight:700;color:#0f1f3d;margin-bottom:4px}
+.pw-sub{font-size:12px;color:#9a9a9a;margin-bottom:28px;line-height:1.6}
+.pw-label{
+  display:block;text-align:left;
+  font-size:11px;font-weight:600;color:#5a5a5a;
+  margin-bottom:6px;letter-spacing:.3px;
+}
+.pw-input{
+  width:100%;padding:11px 14px;
+  border:1.5px solid #e2e0da;border-radius:8px;
+  font-size:14px;font-family:'Noto Sans KR',sans-serif;
+  outline:none;transition:border .15s;
+  letter-spacing:3px;text-align:center;
+  margin-bottom:14px;
+}
+.pw-input:focus{border-color:#0f1f3d;}
+.pw-btn{
+  width:100%;padding:12px;
+  background:#0f1f3d;color:#fff;
+  border:none;border-radius:8px;
+  font-size:13px;font-weight:600;
+  font-family:'Noto Sans KR',sans-serif;
+  cursor:pointer;transition:background .15s;
+}
+.pw-btn:hover{background:#1a3160;}
+.pw-error{
+  font-size:12px;color:#b02a10;
+  margin-top:10px;min-height:18px;font-weight:500;
+}
+.pw-footer{
+  font-size:11px;color:rgba(255,255,255,.4);
+  margin-top:20px;text-align:center;
+}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
+<!-- PASSWORD OVERLAY -->
+<div class="pw-overlay" id="pw-overlay">
+  <div class="pw-box">
+    <div class="pw-logo">⚖️</div>
+    <div class="pw-title">이랜드이츠 RO실</div>
+    <div class="pw-sub">채용공고 컴플라이언스 모니터<br>접근 권한이 있는 담당자만 열람 가능합니다</div>
+    <label class="pw-label">접속 비밀번호</label>
+    <input class="pw-input" type="password" id="pw-input"
+      placeholder="••••••••"
+      onkeydown="if(event.key==='Enter')checkPw()"
+      autocomplete="off" autofocus>
+    <button class="pw-btn" onclick="checkPw()">확인</button>
+    <div class="pw-error" id="pw-error"></div>
+  </div>
+  <div class="pw-footer">이랜드이츠 감사실 | 문의: shinhw@eland.co.kr</div>
+</div>
+
+<script>
+// ── 임시 통합 비밀번호 ─────────────────────────────
+// 추후 브랜드별 개별 비밀번호로 교체 예정
+const PW = 'Eland2026!';
+
+function checkPw(){
+  const val = document.getElementById('pw-input').value;
+  const err = document.getElementById('pw-error');
+  if(val === PW){
+    document.getElementById('pw-overlay').style.display = 'none';
+    sessionStorage.setItem('eland_auth','1');
+  } else {
+    err.textContent = '비밀번호가 올바르지 않습니다. 다시 입력해 주세요.';
+    document.getElementById('pw-input').value = '';
+    document.getElementById('pw-input').focus();
+  }
+}
+
+// 같은 브라우저 세션 내 재접속 시 비밀번호 생략
+if(sessionStorage.getItem('eland_auth')==='1'){
+  document.getElementById('pw-overlay').style.display='none';
+}
+</script>
 <header class="hdr">
   <div class="hdr-in">
     <div class="hdr-l">
